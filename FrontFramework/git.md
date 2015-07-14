@@ -59,7 +59,7 @@
 ###git diff###
 	git diff
 	#工作目录与暂存区区别
-	git diff-cached[<reference>]
+	git diff --cached[<reference>]
 	#暂存区与某次提交差异，默认为HEAD,即当前提交，可以不填
 	git diff <reference>
 	#工作目录与某次提交的差异
@@ -68,16 +68,112 @@
 
 ###git checkout###
 	git checkout --<file>
-	暂存区-->工作目录
-	将会丢弃工作目录的内容
+	#暂存区-->工作目录
+	#将会丢弃工作目录的内容
 
 ###git reset###
 	git reset HEAD <file>
-	将文件内容从上次提交复制到暂存区，撤销暂存区内容
+	#将文件内容从上次提交复制到暂存区，撤销暂存区内容
 	
 ###git checkout HEAD --<file>###
 	git checkout HEAD --<file>
-	将文件内容从上次提交复制到暂存区，撤销全部改动
+	#将文件内容从上次提交复制到工作目录，撤销全部改动
+	！暂存区内容也会被覆盖，慎用！
 
 ##小结##
 ![](http://7xkcnd.com1.z0.glb.clouddn.com/2015-07-13_153429.png)
+一个Git项目中文件的状态大概分成下面的两大类，而第二大类又分为三小类：
+未被跟踪的文件（untracked file）
+已被跟踪的文件（tracked file）
+被修改但未被暂存的文件（changed but not updated或modified）
+已暂存可以被提交的文件（changes to be committed 或staged）
+自上次提交以来，未修改的文件(clean 或 unmodified)
+
+大家可以看到“nothing to commit (working directory clean)”；如果一个工作树（working tree）中所有的修改都已提交到了当前分支里（current head），那么就说它是干净的（clean），反之它就是脏的(dirty)。
+
+##分支操作##
+###git branch###
+	#创建分支
+	git branch <branchName>
+	#删除分支
+	git branch -d <branchName>
+	#产看所有分支,*当前分支，即HEAD指向的分支
+	git branch -v
+git commit以后，master/branchName 指向最新的提交，HEAD也指向最新的提交
+git branch next以后，next指向HEAD指向的引用
+再次commit以后master和HEAD随commit移动，但next不会移动，除非HEAD切换到next
+###git checkout###
+	#HEAD直接指向分支 
+	git checkout <barnchName>
+	#创建分支，HEAD指向分支
+	git checkout -b <branchName>
+	#HEAD指向引用对象，如commitID
+	git checkout <reference>
+	！master/branchName不会跟随
+	！指向没有分支所在的commitID将导致detached HEAD，此时应尽量避免再commit操作，以免当HEAD再次移动时，失去引用，被垃圾回收
+	！detached HEAD只建议读取内容，此时，可以观察到提交时工作目录和暂存区的内容
+	#恢复到上一个分支
+	git checkout -
+###git reset###
+	#默认 将HEAD/master或HEAD/branchName移动到改提交区，同时将内容复制到暂存区
+	git reset --mixed commitID
+	#将HEAD/master或HEAD/branchName移动到改提交区，同时将内容复制到暂存区以及工作目录
+	git reset --hard commitID
+    #将HEAD/master或HEAD/branchName移动到改提交区，保持暂存区以及工作目录
+	git reset --soft commitID
+	！reset以后，由于后面的提交丢失引用，可能会被垃圾回收
+	！git log也不再显式后面的提交信息
+###git reflog###
+	#列出所有经过的commit路径
+	git reflog
+	！该log信息为动态信息，如需回退，应尽快查看
+###捷径###
+	A^
+	#A上的父提交
+	A~n
+	#在A之前的第n次提交
+	#A可以为commitID，HEAD，master,branchName，^ ~n可叠加使用
+###git stash###
+	#当工作内容没有提交时切换分支，checkout分支会被阻止
+	#stash拥有独立的栈，即stash区
+	
+	#保存当前的工作目录和暂存区目录到stash区，并返回干净的工作空间
+	git stash save "message"
+	#查看stash收藏记录
+	git stash list
+	#恢复指定stash记录到工作空间
+	git stash apply stash@{0}
+
+	!stash@{n}因为shell原因可能报错，此时改为'stash@{n}'即可
+	
+	#丢弃stash指定记录
+	git stash drop stash@{0}
+	#恢复指定stash记录到工作空间,并丢弃改指定记录
+	git stash pop stash@{0}
+	#stash pop=stash apply+stash drop
+###git cat-file###
+	#显示git内部对象具体信息
+	git cat-file -p HEAD
+	#tree 当前提交信息
+	#parent 上一次提交信息
+###git merge###
+####合并分支####
+	#将当前分支与指定分支，以及两个分支的共同祖先分支合并
+	#保存到工作目录和暂存区
+	#创建新的提交，新的提交父指向为两个合并的分支
+	#当前分支指向新的提交
+	git merge branchName
+####merge conflicts####
+	#合并冲突
+	git status
+	#找到冲突文件
+	#解决冲突并提交
+	git add .
+	git commit -m "resolved"
+####merge fast-forward####
+	#创建新的分支以后，msater分支未移动，转到next分支进行开发并提交
+	#合并将不会有冲突发生，只是将HEAD/master移到next所在的提交，提交历史变为线性
+	！不会记录合并
+	
+	避免触发fast-forward 模式
+	git merge next --no-ff

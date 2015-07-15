@@ -65,6 +65,7 @@
 	#工作目录与某次提交的差异
 	git diff <commitID1> <commitID2>
 	#两次提交的区别
+![](http://7xkcnd.com1.z0.glb.clouddn.com/gitDiff.png)
 
 ###git checkout###
 	git checkout --<file>
@@ -81,7 +82,8 @@
 	！暂存区内容也会被覆盖，慎用！
 
 ##小结##
-![](http://7xkcnd.com1.z0.glb.clouddn.com/2015-07-13_153429.png)
+![](http://7xkcnd.com1.z0.glb.clouddn.com/gitStatus.png)
+
 一个Git项目中文件的状态大概分成下面的两大类，而第二大类又分为三小类：
 - 未被跟踪的文件（untracked file）
 - 已被跟踪的文件（tracked file）
@@ -135,6 +137,9 @@ git branch next以后，next指向HEAD指向的引用
 	A~n
 	#在A之前的第n次提交
 	#A可以为commitID，HEAD，master,branchName，^ ~n可叠加使用
+###checkout vs reset
+![](http://7xkcnd.com1.z0.glb.clouddn.com/resetVScheckout.png)
+
 ###git stash###
 	#当工作内容没有提交时切换分支，checkout分支会被阻止
 	#stash拥有独立的栈，即stash区
@@ -147,7 +152,8 @@ git branch next以后，next指向HEAD指向的引用
 	git stash apply stash@{0}
 
 	!stash@{n}因为shell原因可能报错，此时改为'stash@{n}'即可
-	
+![](http://7xkcnd.com1.z0.glb.clouddn.com/gitStash.png)
+
 	#丢弃stash指定记录
 	git stash drop stash@{0}
 	#恢复指定stash记录到工作空间,并丢弃改指定记录
@@ -165,6 +171,9 @@ git branch next以后，next指向HEAD指向的引用
 	#创建新的提交，新的提交父指向为两个合并的分支
 	#当前分支指向新的提交
 	git merge branchName
+![](http://7xkcnd.com1.z0.glb.clouddn.com/gitMerge.png)
+![](http://7xkcnd.com1.z0.glb.clouddn.com/gitMerge2.png)
+
 ####merge conflicts####
 	#合并冲突
 	git status
@@ -176,9 +185,11 @@ git branch next以后，next指向HEAD指向的引用
 	#创建新的分支以后，msater分支未移动，转到next分支进行开发并提交
 	#合并将不会有冲突发生，只是将HEAD/master移到next所在的提交，提交历史变为线性
 	！不会记录合并
-	
+![](http://7xkcnd.com1.z0.glb.clouddn.com/mergeFast-forward.png)	
+
 	避免触发fast-forward 模式
 	git merge next --no-ff
+![](http://7xkcnd.com1.z0.glb.clouddn.com/no-ff.png)
 
 ###git rebase###
 	#HEAD位于feature分支
@@ -186,46 +197,72 @@ git branch next以后，next指向HEAD指向的引用
 	#找到共同节点与分支节点之间的所有提交，并重演到master分支后
 	！重演不是复制，commitID不同
 	#将HEAD/feature移动到最新的提交，提交变为线性
-	
+![](http://7xkcnd.com1.z0.glb.clouddn.com/gitRebase2.png)	
+![](http://7xkcnd.com1.z0.glb.clouddn.com/gitRebase2.png)
+
 	#选择重演对象
 	git rebase onto master --commitID
 	#找到指定节点与分支节点之间的所有提交，并重演到master分支后
 	#将HEAD/feature移动到最新的提交，提交变为线性
+![](http://7xkcnd.com1.z0.glb.clouddn.com/gitRebaseOnto.png)
+
 ###rebase vs merge###
 - rebase不会记录合并记录
 - 不要在共有分支上使用rebase,如在master上rebase将导致产生两个master,合并时也会存在相同的内容  
+![](http://7xkcnd.com1.z0.glb.clouddn.com/rebaseVSmerge.png)
+![](http://7xkcnd.com1.z0.glb.clouddn.com/rebaseMaster.png)
 
 ###git tag###
 	#设置标签
 	git tag tagName commitID
+
 ##远程操作##
 以本地HEAD/master为例
 ###local remote server###
 	#初始化一个裸仓库
 	git init ~/git-server --base
 	！没有工作目录
+
+###git remote###
+	#添加远程仓库
+	git remote add [shortname] [url]	
+	#查看远程仓库
+	git remote -v
+![](http://7xkcnd.com1.z0.glb.clouddn.com/gitRemote.png)
+
 ###git push###
 	#将提交历史复制到中央服务器
 	#中央服务器HEAD/master向前移动
 	git push serverUrl branchName
 	!branch为中央服务器分支
+![](http://7xkcnd.com1.z0.glb.clouddn.com/gitPush.png)
+
 - 本地的提交有一个隐藏的origin/master	
 - origin/master不会跟随commit移动
 - origin/master与中央服务器不一致时，push之前需要先同步代码
 
 ###git fetch+git merge###
+当远程库的提交先于本地库时,需要fetch+merge
+![](http://7xkcnd.com1.z0.glb.clouddn.com/BeforeFetch.png)
+![](http://7xkcnd.com1.z0.glb.clouddn.com/BeforeFetch2.png)
+
 	#同步远程origin/master 到本地 origin/master
 	git fetch origin master
 	#即复制远程origin/master到本地，且本地origin/master指向该复制
+![](http://7xkcnd.com1.z0.glb.clouddn.com/fetch.png)
 
 	#将本地HEAD/master与本地origin/master合并	
 	git merge orign master
+![](http://7xkcnd.com1.z0.glb.clouddn.com/mergeOrigin.png)
+
 	#将本地历史复制到远程，远程将保留多个作者的历史
 	git push origin master
 ###git pull###
 	#git fetch+git merge
 	git pull origin master
 	#相当于 git fetch remote+git merge orgin master
+![](http://7xkcnd.com1.z0.glb.clouddn.com/gitPull.png)
+
 ###git clone###
 	#复制远程仓库到本地指定目录
 	git clone remoteUrl localDirectory 

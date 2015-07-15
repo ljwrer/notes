@@ -140,6 +140,13 @@ git branch next以后，next指向HEAD指向的引用
 ###checkout vs reset
 ![](http://7xkcnd.com1.z0.glb.clouddn.com/resetVScheckout.png)
 
+	git reset <file>
+	默认是
+	git reset HEAD <file> 
+	当然你也可以恢复到某次提交
+	git reset 59d8178 <file>
+
+
 ###git stash###
 	#当工作内容没有提交时切换分支，checkout分支会被阻止
 	#stash拥有独立的栈，即stash区

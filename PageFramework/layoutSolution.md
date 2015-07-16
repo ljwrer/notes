@@ -23,7 +23,7 @@ text align:对子元素inline元素有效
 
 - child会继承text-align属性，需要单独调整
 ####table+margin####
-display:table类似display:child,但宽度为内容宽度  
+display:table类似display:block,但宽度为内容宽度  
 利用类似block定宽+margin:auto达到居中  
 	
 	.child{

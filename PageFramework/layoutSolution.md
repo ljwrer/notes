@@ -132,3 +132,73 @@ flex-item默认align-items为stretch,撑满剩余空间，修改为center
 		display: flex;
 		align-items: center;
 	}
+###水平居中+垂直居中###
+####inline-block+text-align+table-cell+vertical-align####
+综合两种类inline元素居中
+
+	.parent{
+		text-align: center;
+		display: table-cell;
+		vertical-align: middle;
+	}
+	.child{
+		display: inline-block;
+	}  
+优点：
+
+ - 兼容性好
+ - 可修改结构兼容IE6,7
+
+<!-- -->
+	.parent{
+		height: 500px;
+		width: 500px;
+		background: deepskyblue;
+		text-align: center;
+		display: table-cell;
+		vertical-align: middle;
+	}
+	.child{
+		background: brown;
+		display: inline-block;
+	}
+
+	<table>
+		<tr><td class="parent">
+				<div class="child">demo</div>
+		</td></tr>
+	</table>
+####absolute+transform####
+	.parent{
+		position: relative;
+	}
+	.child{
+		position: absolute;
+		left: 50%;
+		top:50%;
+		transform: translate(-50%,-50%);
+优点：
+
+ - 脱离文档流，不对其他元素产生影响
+
+缺点：
+
+ - css3兼容性问题
+####flex+justify-content+align-items####
+	.parent{
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+优点：
+
+ - 只设置parent
+
+缺点：
+
+ - css3兼容性
+
+###小结###
+---
+ - 掌握css属性和值的特性
+ - 问题分解

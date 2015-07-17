@@ -180,9 +180,7 @@ flex-item默认align-items为stretch,撑满剩余空间，修改为center
 		transform: translate(-50%,-50%);
 优点：
 
- - 脱离
- - 
- - ，不对其他元素产生影响
+ - 脱离文档流，不对其他元素产生影响
 
 缺点：
 
@@ -482,3 +480,27 @@ table-layout:fixed 单元默认等分宽度
 table布局默认等高
 ####flex####
 align-items默认为strech，默认等高
+####float####
+使用padding-box填充背景颜色  
+使用margin-bottom抵消填充  
+使用overflow截掉非文本部分  
+
+	.left{
+		width: 100px;
+		float: left;
+		margin-right: 10px;
+	}
+	.right{
+		overflow: hidden;
+	}
+	.left,.right{
+		padding-bottom: 9999px;
+		margin-bottom: -9999px;
+	}
+	.parent{
+		overflow: hidden;
+	}
+优点：兼容性好  
+缺点：伪等高
+
+---

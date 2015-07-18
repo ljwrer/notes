@@ -192,7 +192,7 @@ flex-item默认align-items为stretch,撑满剩余空间，修改为center
 		align-items: center;
 	}
 优点：
-
+0
  - 只设置parent
 
 缺点：
@@ -306,7 +306,6 @@ BFC容器内容与外界隔离
 	.left{
 		width: 100px;
 		padding-right: 20px;
-		background-clip: content-box;
 	}
 缺点：
 
@@ -383,7 +382,6 @@ left,right不耦合即可
 	.left{
 		width: 0.1%;
 		padding-right: 20px;
-		background-clip: content-box;
 	}
 	.left p{
 		width: 100px;
@@ -421,7 +419,8 @@ left,right不耦合即可
 ---
 ###等分布局###
 每一列宽度一致，间距一致  
-C+G=(W+G)*N  
+C+G=(W+G)*N   
+div不设背景而div子元素设背景即可取消padding背景色 
 ####float####
 margin-left为负可以增加宽度  
 box-sizing:border-box 宽度包含padding
@@ -434,7 +433,6 @@ box-sizing:border-box 宽度包含padding
 		padding-left: 20px;
 		width: 25%;
 		box-sizing: border-box;
-		background-clip: content-box;
 	}
 优点：兼容性好，IE6,7部分兼容  
 缺点：结构与样式耦合性，列数变化时需修改宽度
@@ -455,7 +453,6 @@ table-layout:fixed 单元默认等分宽度
 	.column{
 		display: table-cell;
 		padding-left: 20px;
-		background-clip: content-box;
 	}
 优点：结构与样式解耦  
 缺点：结构复杂
@@ -504,3 +501,93 @@ align-items默认为strech，默认等高
 缺点：伪等高
 
 ---
+##全屏布局##
+###定宽高+自适应###
+####position####
+高性能，高兼容性
+overflow+min-height+inner实现滚动
+
+	html,body,.container{
+		height: 100%;
+		overflow: hidden;
+	}
+	.header{
+		position: absolute;
+		top:0;
+		left: 0;
+		right: 0;
+		height: 100px;
+	}
+	.main{
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 100px;
+		bottom: 100px;
+	}
+	.footer{
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		height: 100px;
+	}
+	.aside{
+		width: 100px;
+		position: absolute;
+		left: 0;
+		top: 100px;
+		bottom: 100px;
+	}
+	.section{
+		overflow: auto;
+		position: absolute;
+		left: 100px;
+		top: 100px;
+		right: 0;
+		bottom: 100px;
+		overflow: auto;
+	}
+	.inner{
+		min-height: 1000px;
+	}
+
+####flex####
+低性能+低兼容性
+	
+	html,body,.container{
+		height: 100%;
+		overflow: hidden;
+	}
+	.container{
+		display: flex;
+		flex-direction: column;
+	}
+	.header{
+		height: 100px;
+	}
+	.main{
+		flex: 1;
+		display: flex;
+	}
+	.footer{
+		height: 100px;
+	}
+	.aside{
+		width: 100px;
+	}
+	.section{
+		bottom: 100px;
+		flex: 1;
+		overflow: auto;
+	}
+	.inner{
+		min-height: 1000px;
+	}
+
+###百分比宽高+自适应
+百分比为相对定位元素的百分比  
+把px高位百分比即可
+
+###内容自适应###
+flex不设宽高即可

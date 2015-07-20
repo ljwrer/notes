@@ -1,4 +1,5 @@
 #布局解决方案#
+---
 ##居中布局##
 ###水平居中###
 宽度不定，父容器宽度不定
@@ -92,6 +93,8 @@ flex-item默认宽度为auto，浏览器计算实际宽度，一般为内容宽�
 缺点：
  
  - IE6,7,8不兼容 
+
+---
 ###垂直居中###
 父元素高度不定  
 子元素高度不定
@@ -133,6 +136,8 @@ flex-item默认align-items为stretch,撑满剩余空间，修改为center
 		display: flex;
 		align-items: center;
 	}
+
+---
 ###水平居中+垂直居中###
 ####inline-block+text-align+table-cell+vertical-align####
 综合两种类inline元素居中
@@ -333,6 +338,7 @@ flex：1=flex:1 1 0
  - 兼容性
  - 性能问题，适用于小范围布局
 
+---
 ###两列定宽+自适应###
 类似定宽+自适应，中间元素按照定宽元素设置即可
 	
@@ -345,6 +351,7 @@ flex：1=flex:1 1 0
 		overflow: hidden;
 	}
 
+---
 ###不定宽+自适应###
 left,right不耦合即可
 
@@ -402,6 +409,7 @@ left,right不耦合即可
 		width: 100px;
 	}
 
+---
 ###多列不定宽+自适应###
 类似不定宽+自适应
 

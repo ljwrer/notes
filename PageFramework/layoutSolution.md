@@ -197,7 +197,7 @@ flex-item默认align-items为stretch,撑满剩余空间，修改为center
 		align-items: center;
 	}
 优点：
-0
+
  - 只设置parent
 
 缺点：

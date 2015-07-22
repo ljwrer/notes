@@ -334,7 +334,7 @@
  - Tabs
  - Editor
 
-职责
+职责:
  - 提供基础组件css支持
  - 提供常用组件如Slider,Modal
  - 提供声明式的调用方法（Optional)
@@ -359,7 +359,7 @@
  - 超过20个javascript组件（jQuery）
  - MIT
 
-其他非jQuery支持
+其他非jQuery支持:
 
  - Knockout
  - Angularjs
@@ -370,18 +370,19 @@
  - Client Side
  - Server Side
 
-职责
+职责:
 
  - 监听url变化，并通知注册的模块
  - 通过javascript进行主动跳转
  - 历史管理
  - 对目标浏览器的兼容性的支持
+
 ---
  - 匹配url时通知模块
  - 多级路由
  - 不对全局进行切换
 
-库
+库:
  - page.js
  	- 兼容IE8+
  	- 类似Express.Router的路由规则的前端路由库

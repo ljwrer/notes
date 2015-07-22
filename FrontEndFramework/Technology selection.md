@@ -211,6 +211,7 @@ namespace：
 	}
 	exports.Calcuator=Calcuator;//接口暴露
 优点：
+
  - 依赖管理成熟可靠
  - 社区活跃，规范接受度高
  - 运行时支持，模块定义非常简单
@@ -219,6 +220,7 @@ namespace：
  - 可以处理循环依赖
 
 缺点：
+
  - 不是标准组织的规范
  - 同步的require,没有考虑浏览器环境
 	 - browserify,webpack，component打包
@@ -263,20 +265,21 @@ namespace：
 
 ####Simplified CommonJS wrapping
 函数通过tosting得到函数体，用正在表达式提取出依赖列表
+
 	define(function(require, exports) {
-	var math = require("./math");//依赖声明
-	function Calcuator(container) {
-		this.left = container.querySelector(".j-left");
-		this.right = container.querySelector(".j-right");
-		this.add = container.querySelector(".j-add");
-		this.result = container.querySelector(".j-result");
-		this.add.addEventListener("click", this.compute.bind(this));
-	}
-	Calcuator.prototype.compute = function() {
-		this.result.textContent = math.add(+this.left.value, +this.right.value)
-	}
-	exports.Calcuator = Calcuator;//接口暴露
-})
+		var math = require("./math");//依赖声明
+		function Calcuator(container) {
+			this.left = container.querySelector(".j-left");
+			this.right = container.querySelector(".j-right");
+			this.add = container.querySelector(".j-add");
+			this.result = container.querySelector(".j-result");
+			this.add.addEventListener("click", this.compute.bind(this));
+		}
+		Calcuator.prototype.compute = function() {
+			this.result.textContent = math.add(+this.left.value, +this.right.value)
+		}
+		exports.Calcuator = Calcuator;//接口暴露
+	})
 
 ####Loader Plugins(草案)####
 完整组件=结构+逻辑+样式
@@ -307,6 +310,7 @@ AMD加载其他资源
 	});
 
 优点：
+
  - 依赖管理成熟可靠
  - 社区活跃，规范接受度高
  - 转为异步IO环境打造，适合浏览器环境
@@ -316,6 +320,7 @@ AMD加载其他资源
  - 成熟的打包构建工具，并可结合插件
 
 缺点：
+
  -  模块定义繁琐，需要额外嵌套
  -  只是库级别的支持，需要引入额外库
 	 -  如require.js
@@ -343,12 +348,14 @@ AMD加载其他资源
 	exports{add,sub}//export关键字 接口暴露
 
 优点：
+
  - 是真正的规范，未来的模块标准
  - 语言级别的关键字支持
  - 适应所有javascript运行时，包括浏览器
  - 同样可以处理循环依赖
 
 缺点
+
  - 规范并未到稳定级别
  - 基本还没有浏览器支持
  - 鲜有项目使用，即时有大量的6to5transpiler

@@ -1,8 +1,8 @@
 #第三章 DOM#
 ##3.4 节点##
- - 元素节点
- - 文本节点
- - 属性节点
+ - 元素节点 nodeType==1
+ - 文本节点 nodeType==3
+ - 属性节点 nodeType==2
 
 ###3.4.5 获取元素###
 getElementsByClassName（"a b c"）  

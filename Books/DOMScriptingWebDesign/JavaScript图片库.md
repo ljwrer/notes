@@ -14,6 +14,6 @@ stopPropagation, preventDefault 和 return false 阻止默认事件
 ##小结##
  - childNodes
  - nodeType
- - nodeValue
+ - nodeValue(文本节点only Element.firstChild.nodevalue)
  - firstChild=childNodes[0]
  - lastChild=childNodes[childNodes.lenght-1]

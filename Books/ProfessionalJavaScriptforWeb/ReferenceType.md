@@ -102,9 +102,15 @@ ES5(IE9+):
 
  - 毫秒数
  - Date.parse()
+	 - 接收字符串
  - Date.UTC()
+	 - 接受年月日时分秒毫秒
+	 - 月从0开始计数
  - 字符串
+	 - 模拟上述方法
+	 - 模拟Date.UTC()时返回本地时间
 <!-- -->
+
 
 	var someDate = new Date(Date.parse("May 25, 2004"));
 	var someDate = new Date("May 25, 2004");
@@ -112,3 +118,19 @@ ES5(IE9+):
 	var y2k = new Date(Date.UTC(2000, 0));
 	// GMT 时间 2005 年 5 月 5 日下午 5:55:55
 	var allFives = new Date(Date.UTC(2005, 4, 5, 17, 55, 55));
+
+Date.now():
+ES5(IE9+):返回表示调用这个方法时的日期和时间的毫秒数
+低版本使用：
+
+	var time=+new Date()
+	转化为字符串
+
+##5.3.1继承方法与日期格式化方法
+
+toLocaleString()，toString()，toDateString()，toTimeString()，toLocaleDateString()，toLocaleTimeString()，toUTCString()
+！！以上方法因浏览器差异极大基本不可用
+
+valueOf()返回毫秒数，可用于比较时间
+
+#5.4 RegExp类型

@@ -4,13 +4,15 @@
 	 - 页面优化
  - html5+css3
 	 - css3选择器
-	 - 阴影与圆角
+	 - flex布局
+	 - 渐变，阴影与圆角
 	 - 变形与动画
  - JavaScript
 	 - ECMAScript
 		 - 作用域链与闭包
 		 - 对象的创建与继承
 		 - 原型与原型链
+		 - 正则表达式
 	 - DOM
 		 - DOM树增删查改
 		 - 事件流
@@ -25,7 +27,7 @@
  - 库和框架
 	 - DOM库
 		 - jQuery
-		 - vedio.js
+		 - video.js
 	 - 工具库
 		 - es5-shim
 		 - underscore
@@ -46,6 +48,7 @@
 	 - 自动化
 		 - nodejs npm
 		 	- Yeoman+Grunt+Bower
+ 	 - 单元测试 
  - 其他
 	 - Java SE
 	 - Android开发
@@ -58,12 +61,21 @@
 	 - 《JavaScript语言精粹》
  - 网易-前端工程师微专业
 	 - 时间：2015年5月25日-2015年9月1日
-	 - 内容
+	 - 内容：
 		 1. 页面制作
 		 2. Javascript程序设计
 		 3. DOM编程艺术
 		 4. 页面架构
 		 5. 产品前端架构
 		 6. Web前端开发实践 
+
+
+
+
+todo:
+
+70min
+课件 css3 dom
+排序
 
 	

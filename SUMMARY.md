@@ -1,6 +1,6 @@
 # Summary
 
-* [Part I](/Books/DOMScriptingWebDesign/CSS-DOM.md)
+* [Part I](Books/DOMScriptingWebDesign/CSS-DOM.md)
     * [Writing is nice](part1/writing.md)
     * [GitBook is nice](part1/gitbook.md)
 * [Part II](part2/README.md)

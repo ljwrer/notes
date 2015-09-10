@@ -106,7 +106,7 @@
 		 - DOM树增删查改
 		 - 事件流
 		 - 动画，视频，音频
-		 - cookie
+		 - cookie,Storage
 		 - 表单
 	 - BOM
 	 - Ajax
@@ -156,6 +156,6 @@
 ---
 
 # 致谢
-一年多以前，因为看了[https://code.org](https://code.org)的推广视频[http://v.youku.com/v_show/id_XNTIxMDc1OTcy](http://v.youku.com/v_show/id_XNTIxMDc1OTcy)，放弃了军工企业稳定的工作，经过一段时间的准备，顺利的加入了前端工程师的行列！
-在这个前端最好的年代，新技术层出不穷，MVVM与模板框架，组件库，canvas与svg是我接下来学习的目标，并希望能有朝一日能写出自己的Utility和Widget组件，期待加入前端技术氛围浓厚的团队！
+一年多以前，因为看了[https://code.org](https://code.org)的推广视频[http://v.youku.com/v_show/id_XNTIxMDc1OTcy](http://v.youku.com/v_show/id_XNTIxMDc1OTcy)，放弃了军工企业稳定的工作，经过一段时间的准备，顺利的加入了前端工程师的行列！  
+在这个前端最好的年代，新技术层出不穷，前端自动化、MVVM与模板框架、组件库、canvas与SVG是我接下来学习的目标，并希望能有朝一日能写出自己的大型Utility和Widget组件，期待加入前端技术氛围浓厚的团队！  
 最后感谢您花时间阅读我的简历，期待能有机会和您共事。

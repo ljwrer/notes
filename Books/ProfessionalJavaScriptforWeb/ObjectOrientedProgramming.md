@@ -14,6 +14,7 @@ ES5(IE9+)
  - [[Value]]：包含这个属性的数据值。读取属性值的时候，从这个位置读；写入属性值的时候，把新值保存在这个位置。这个特性的默认值为 undefined。
 
 Object.defineProperty()
+
  - 这个方法接收三个参数：属性所在的对象、属性的名字和一个描述符对象。其中，描述符（descriptor）对象的属性必须是： configurable、 enumerable、 writable 和 value。设置其中的一或多个值，可以修改对应的特性值。
  - 把 configurable 设置为 false，表示不能从对象中删除属性。而且，一旦把属性定义为不可配置的，就不能再把它变回可配置了。
  - 若不指定configurable、 enumerable、 writable，默认均为false
@@ -28,6 +29,7 @@ Object.defineProperty()
  - [[Set]]：在写入属性时调用的函数。默认值为 undefined。
 
 Object.defineProperty()  IE9+
+
  - 使用访问器属性的常见方式，设置一个属性的值会导致其他属性发生变化。
  - 只指定 getter 意味着属性是不能写
  - 只指定 setter 函数的属性不能读

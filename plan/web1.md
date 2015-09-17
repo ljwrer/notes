@@ -53,7 +53,7 @@
 - 所在部门：大工业事业部
 - 汇报对象：刘超 15367918551
 
----
+<br />
 
 #项目经历
 
@@ -72,7 +72,7 @@
  - 职责：
 	 1. 前后端异步接口定义
 	 2. 利用RequireJS实现JavaScript AMD模块化
-     3. 维护项目git库
+     3. 维护项目Git库
 
 ##网易Web前端开发实践
  - 项目地址：[https://github.com/ljwrer/FrontEndWebDeveloperNanodegreeHomework](https://github.com/ljwrer/FrontEndWebDeveloperNanodegreeHomework)

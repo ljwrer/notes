@@ -148,5 +148,67 @@ css和js都有命名冲突
 
 ---
 
-#第十一章
-引入框架组件draggable()方法
+#第十一章 拖放
+
+ - 引入框架组件draggable()方法
+ - draggable（{handle：selector}）
+
+---
+
+#第十二章 自定义事件
+##12.1 概述
+
+ - 框架组件层：封装API，抽象成高可读性组件
+ - BOX组件
+	 - color属性
+	 - open()方法
+	 - 事件open,close,提升事件层级，不直接监听DOM事件，改为监听组件的自定义事件
+ - 定义
+	 - 基于原生事件，再封装判断条件
+	 - 观察者模式
+	 - 无需降到原生事件 
+
+##12.2 自定义事件实现
+
+ - 添加this.handlers属性记录自定义事件注册
+ - on注册
+ - fire依次触发
+ - 内部原生事件调用fire()
+
+---
+
+#第十三章 连缀语法
+
+	内部方法结尾
+	return this;
+
+---
+
+#第14章 抽出Widget抽象类
+
+ - utility
+	 - UI无关
+	 - cookie，ajax，drag，resize
+ - widget
+	 - UI
+	 - tabview,treeview,日历，富文本编辑器，弹出层
+
+<!-- -->
+
+	this.handers
+	on()
+	fire()
+
+#第15章 为Widget类设计统一生命周期
+
+ - 添加容器属性
+ - 添加UI相关接口(空方法，子类继承实现)
+	 - 添加DOM节点renderUI
+	 - 监听事件bindUI
+		 - DOM事件
+		 - 自定义事件
+	 - 初始化组件属性syncUI
+	 - 销毁前的处理destructor
+ - 添加UI相关方法（调用内部方法）
+	 - render渲染组件（可接收外部容器）
+	 - destroy销毁组件

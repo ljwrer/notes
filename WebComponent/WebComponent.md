@@ -199,6 +199,8 @@ css和js都有命名冲突
 	on()
 	fire()
 
+---
+
 #第15章 为Widget类设计统一生命周期
 
  - 添加容器属性
@@ -212,3 +214,28 @@ css和js都有命名冲突
  - 添加UI相关方法（调用内部方法）
 	 - render渲染组件（可接收外部容器）
 	 - destroy销毁组件
+
+---
+
+#第16章 实现confirm方法
+
+ - 修改renderUI
+ - 填充bindUI
+ - 填充类型参数
+
+---
+
+#第17章 实现prompt方法
+
+ - 添加input
+
+#第18章 实现common方法
+
+ - 修改renderUI
+ - 判断windowType
+
+其他：
+
+ - MVC
+ - 监听valueChange
+

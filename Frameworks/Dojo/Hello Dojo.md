@@ -1,5 +1,5 @@
 ---
-#plugins
+##plugins
 
 ！结尾，放在依赖列表最后
 dojo/text
@@ -225,3 +225,23 @@ dojo.config
 	cookie填充
 	查询参数填充
 	data-dojo-config
+
+#Modern Dojo
+dojo/on处理dom事件和控件的事件
+
+aspect.after()替换dojo.connetct()处理回调
+aspect可以在函数执行之前或之后回调
+dojo/topic
+
+#CDN
+库文件部署在CDN
+其他模块部署在本地 
+配置dojoBlankHtmlUrl
+
+	var dojoConfig = {
+					dojoBlankHtmlUrl: location.pathname.replace(/\/[^/]+$/, '') + '/blank.html',
+					packages: [{
+						name: 'custom',
+						location: location.pathname.replace(/\/[^/]+$/, '') + '/js/custom'
+					}]
+				};

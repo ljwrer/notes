@@ -26,7 +26,7 @@ package.js  Dojo-specific build information
 	}
 
 ---
-##Laying Out Your Application
+###Laying Out Your Application
 
 	src:{
 			dojo
@@ -35,7 +35,7 @@ package.js  Dojo-specific build information
 			app
 		}
 
-##packages
+###packages
 main application package directory:
 
  - package.json
@@ -108,7 +108,7 @@ main application package directory:
 	 - 位于包根目录
 	 - Typically, you'll have just one package containing your entire application, but if you've split your code into multiple packages (for instance, with shared/common modules in a different package), you will need to create both of these files for each package.
 
-##Package Descriptors
+###Package Descriptors
 package:json
 
 	{
@@ -151,7 +151,7 @@ build属性:
 
 `dojoBuild`:指定`<package.name>.profile.js`
 
-##The Package Build Profile
+###The Package Build Profile
 
 	var profile = (function(){
 	    return {
@@ -274,7 +274,7 @@ mid：模块名 如dojo/dojo
 
 dgrid profile示例：[https://github.com/SitePen/dgrid/blob/master/package.js](https://github.com/SitePen/dgrid/blob/master/package.js)
 
-##The Application Build Profile
+###The Application Build Profile
 在app目录创建app.profile.js 
 
 	var profile = (function(){
@@ -316,7 +316,7 @@ dgrid profile示例：[https://github.com/SitePen/dgrid/blob/master/package.js](
 	    };
 	})();
 
-##Build Optimization
+###Build Optimization
 
  - layerOptimize
 	 - layer压缩工具
@@ -342,11 +342,11 @@ dgrid profile示例：[https://github.com/SitePen/dgrid/blob/master/package.js](
  - staticHasFeatures
 	 - 其他功能，如dead code path removal with the Closure Complier
 
-##Dead Code Path Removal
+###Dead Code Path Removal
 staticHasFeatures在build时强制修改配置文件  
 [http://dojotoolkit.org/reference-guide/1.10/dojo/has.html](http://dojotoolkit.org/reference-guide/1.10/dojo/has.html)
 
-##Layers
+###Layers
 
 	var profile = {
 	    layers: {
@@ -376,7 +376,7 @@ dojo/main会默认被build进入dojo/dojo
 	//包含AMD加载器
      boot: true
 
-##Default Configuration
+###Default Configuration
 
 	defaultConfig: {
 	    hasCache:{
@@ -388,3 +388,339 @@ dojo/main会默认被build进入dojo/dojo
 	    },
 	    async: 1
 	},
+
+---
+#Ajax with dojo/request
+###dojo/request
+param:
+
+ - method
+	 - `request.get` `request.post`, `request.put`, `request.del`简化
+ - sync
+ - query 
+	 - `string` `object`
+ - data 
+ 	 - `string`, `key-value object`, `FormData object`
+ - timeout
+	 - 毫秒
+	 - 触发error handler.
+ - handleAs
+	 - `text` (the default), `json`,`javascript`, and `xml`.
+
+return:
+
+dojo/promise/promise
+
+promise.response.then
+
+promise.response.getHeader
+
+###JSON 
+handleAs:"json"
+
+###dojo/request/script JSONP
+
+	script.get(<url>,{
+		jsonp: "callback",
+		query:{}
+	}).then(fucntion(response){});
+
+###dojo/request/notify Reporting Status
+
+监听所有dojo/request
+
+	notify("<status>",function(){})
+
+###dojo/request/registry
+
+	registry.register(<string>/<reg>/<function>,<provider>script)
+
+匹配的url类型通过指定provider,如xhr,script
+
+return.remove()解除绑定
+
+---
+
+#Arrays
+###Searching dojo/_base/array
+
+	array.indexOf(<array>,item)
+	array.lastIndexOf(<array>,item)
+	===
+
+###Looping
+	
+	array.foreach(<array>,fuction()，<scope>)
+
+ - undefined不跳过
+ - 直接对数组操作
+ - <scope>可设为this
+ - map,filter,match（evety/some）类似
+
+---
+
+#Augmenting Objects
+
+浅拷贝
+###lang.mixin
+
+	lang.mixin(obj,obj1,...)
+
+###declare.safeMixin
+不拷贝constructor
+
+###lang.extend
+作用于原型
+
+---
+#Using Declarative Syntax
+声明式语法+dojo/parser
+
+###Configuring Objects
+data-dojo-type+data-dojo-props
+
+###Non-Widgets
+dojo/parser对不可视对象有效，但需要data-dojo-id作为挂钩，且会设为全局变量
+
+###Modifying Behavior（不推荐使用）
+每个`<script>` 的外层scope为global
+
+	dijit/registry
+	可访问其他scope
+	registry.byId
+
+###Auto-Require
+自动注入data-dojo-type声明的模块  
+打包程序不会检测到，因此存在性能问题，可以通过declarative tag解决
+
+---
+
+#Creating Classes
+##Basic Dojo Class Creation with Dojo
+###className：
+####Named Class 命名类
+
+	declare(<className>,<superClass>,properties)
+
+	全局变量，可通过dojo/parser解析
+
+####"Anonymous" Class匿名类
+
+	declare(null,<superClass>,properties(作用于原型))
+
+###SuperClass(es)：
+
+	<array>/<className>
+
+	多继承采用对第一个父类mixin的方式
+
+###Properties and Methods Object：
+
+##The constructor Method
+safeMixin会忽略args中的constructor属性
+
+		constructor:function(args){
+            declare.safeMixin(this,args)
+        }
+
+##Inheritance
+为避免引用类型共享，引用类型需用null声明并在constructor中初始化
+
+	declare(null, {
+	    // not strictly necessary, but good practice
+	    // for readability to declare all properties
+	    memberList: null,
+	    roomMap: null,
+	
+	    constructor: function () {
+	        // initializing these properties with values in the constructor
+	        // ensures that they ready for use by other methods
+	        // (and are not null or undefined)
+	        this.memberList = [];
+	        this.roomMap = {};
+	    }
+	});
+
+###this.inherited
+在子类的方法内调用父类的同名方法，不要在constructor内调用
+
+	this.inherited(arguments);
+
+---
+
+#Getting Started with Deferreds
+##dojo/Deferred
+实例化Deferred，调用then()  
+dojo.request返回的Promise对象有类似Deferred对象的方法
+
+	deferred.resolve(response);
+	deferred.reject(error);
+##Chaining
+Deferred.then()返回类似Deferred对象，且返回的变量可以被then()的函数调用，且不影响外层的Deferred
+
+	var rq=request('url');
+	var rq1=rq.then(function(){
+		return value
+	})
+	rq1.then(function(value){
+		//此处value即为上文返回的value
+	})
+
+##Lists of Deferreds
+多重请求 
+
+dojo/promise/all and dojo/promise/first
+
+---
+
+#Feature Detection and Device Optimized Builds
+##浏览器
+staticHasFeatures导出不同的包
+使用userAgent条件加载
+##选择器
+acme（sync默认）/lite(async默认，使用querySeletor,删除部分css3选择器)
+
+	var profile = {
+	    selectorEngine:"lite",
+	    ...
+	};
+
+	var dojoConfig = {
+	    async: true,
+	    selectorEngine:"lite"
+	}
+
+##Using has()
+
+	require(["dojo/has"], function(has){
+	    if(has("touch")){
+	        // show our touch interface
+	    }else{
+	        // show our mouse-driven interface
+	    }
+	});
+
+	//自定义has
+	require(["dojo/has"], function(has){
+	    // test if we have video
+	    has.add('html5-video', !!document.createElement('video').canPlayType);
+	    if(has('html5-video')){
+	        // show our video with a &lt;video&gt; element
+	    }else{
+	        // use flash or something
+	    }
+	});
+
+---
+
+#Using dojo/hash and dojo/router
+##Changing the hash
+将模板的html放入json,代理`<a>`点击事件，请求json后，innerHTML修改页面，但书签将失效
+
+###dojo/hash
+使用hash()更新url
+
+	topic.subscribe("/dojo/hashchange", function(page){
+		//更新history
+        hash(page)
+    });
+
+	hash(<url>,<boolean>)
+	//@<url> location.href+="#"+<url>
+	//@boolean true: 替换history
+
+	lastPage = (/([^\/]+).html$/.exec(location.pathname) || [])[1] || "index";
+	hash(location.hash || lastPage, true);
+
+###sub/pub
+
+	require(["dojo/topic"], function(topic){
+	    topic.subscribe("some/topic", function(){
+	        console.log("received:", arguments);
+	    });
+	    //@return handle
+		//@handle remove()
+	    topic.publish("some/topic", "one", "two");
+	});
+
+##Responding to hash changes: dojo/router
+	
+	require(["dojo/router"], function(router){
+	  router.register("/something/:id", function(evt){
+	    // Will fire when the hash matches
+	    // evt.params.id will contain what is passed in :id
+	  });
+	
+	  // Startup must be called in order to "activate" the router
+	  router.startup();
+	});
+
+##Caveats
+url统一添加前缀防止冲突
+
+---
+
+#Making Functions with hitch and partial
+##Binding execution context with lang.hitch
+lang.hitch类似bind
+##Changing function signatures with lang.partial
+预设参数
+	// assuming we have a dojo/data store called "myStore"
+	
+	// our function
+	var putValue = function(store, item, attr, value){
+	    return store.setValue(item, attr, value);
+	}
+	
+	// ...
+	// their function signature
+	someObject.setValueHandler = function(item, attr, value){
+	    //    placeholder function to be overridden
+	};
+	
+	// ...
+	// our solution using lang.partial
+	someObject.setValueHandler = lang.partial(putValue, myStore);
+	
+	// ...
+	// somewhere in the application when setValueHandler is invoked,
+	// our putValue function will already have the "store" arg
+	// set to a reference to "myStore"
+	someObject.setValueHandler(someItem, "foo", "bar");
+
+---
+
+#JSONP with dojo/request
+JSONP不计入并发请求
+##dojo/request/script
+设置timeout处理错误  
+dojo将自动创建回掉函数  
+查询参数为？<jsonp>=dojohash
+服务端按照查询参数将数据包含在以查询参数创建的函数中
+
+---
+
+#Dojo Deferreds and Promises
+promise的then()方法返回promise对象，可链式调用  
+回掉不会修改传递的值  
+在链式调用中如没有返回值则后面的回掉得到undefined  
+Deferred对象拥有promise属性
+
+##dojo/when
+
+	when(<promise>/value,callback,errorHandle,progressHandle)
+
+ - when(value)  直接callback，且value为callback第一个参数值，返回callback值，如没有callback，返回value
+ - when(promise) callback,errorHandle,progressHandle加入promise.when(),返回新的promise
+
+利用when可以同时处理同步和异步数据，最好把when return出来方便再次使用then
+
+##Managing lists of promises with dojo/promise/all
+dojo/promise/all
+
+组合多个promise,所有异步请求完成后执行then()
+
+	all([promise0,promise1,...]).then(function(response){
+		//promise0-->response[0]
+		//promise1-->response[1]
+	})

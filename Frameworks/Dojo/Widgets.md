@@ -315,3 +315,364 @@ onReset/onSubmit
 3. Create groups of shapes (grouping shapes together)
 4. Animate shapes or groups of shapes (transform, scale, etc.)
 5. Add shape events
+
+##Creating the Surface
+
+	gfx.createSurface("surfaceElement", 400, 400);
+
+##Creating Shapes
+
+	gfx.create_ShapeName_(properties)
+
+ - applyTransform: Allows for transforming of a shape (scaling and skewing, for example)
+ - getFill/setFill: Get and set fill colors
+ - getStroke/setStroke: Get and set stroke colors
+ - moveToBack/moveToFront: Moves shapes based on "z-indexing"(与css有区别)
+
+##Styling Shapes
+
+ - Filling a Shape
+	 - setFill
+ - Setting a Stroke on a Shape
+	 - setStroke
+ - Choosing a Font
+	 - setFont
+
+##Grouping Shapes Together
+多个shape组成group可当作一个shape处理
+
+ - createGroup()
+ - add（`<shape>`）
+ - new Moveable(group)
+
+##Animations and Transformations
+dojox/gfx/fx
+
+ - animateFill
+ - animateFont
+ - animateStroke
+
+##Rotating a Shape
+
+ - animateTransform
+	 - rotateAt
+	 - rotategAt
+
+##Scaling and Skewing
+
+ - applyTransform 
+
+##event
+
+ - shape.on
+ - group.on
+
+---
+
+#A Loading Overlay
+
+---
+
+#Dijit Menus
+dijit/Menu-->dijit/MeunItem
+
+##Menu Structure
+dec:PopupMenuItem 当作 MenuItem 嵌套，取第一个几点的innerText作为label名
+
+##Menu Icons
+iconClass:class  内部是table布局
+
+##Menu Variations
+
+	//为windows添加右键菜单
+	contextMenuForWindow：true
+	//为节点添加右键菜单
+	targetNodeIds:id/node/Array
+	//使用选择器，即使菜单渲染时没有生成的节点也会有效 
+	selector:selector
+	//便于popup绑定	
+	id
+
+>registry.byNode  
+>registry.getEnclosingWidget
+
+##MenuBars and More
+dijit/MenuBar(水平的menu)  dijit/MenuBarItem
+
+##Menus in Widgets
+dijit/Menu嵌套在dijit/form/ComboButton和dijit/form/DropDownButton内形成下拉菜单.
+
+##Event
+
+ - onItemHover
+ - onItemUnHover
+ - onItemClick
+ - onOpen
+ - onClose
+
+---
+
+#Selective with Dijit
+
+ - dijit/form/Select
+	 - 可定制样式(span模拟)
+ - dijit/form/FilteringSelect
+	 - 带输入框，可筛选
+ - dijit/form/ComboBox
+
+##dijit/form/Select
+
+	<select data-dojo-type="dijit/form/Select"></select>
+
+ - displayedValue: The value presently displayed in the field（innerText）
+ - value:(prop(value))
+ - onChange
+
+##dijit/form/FilteringSelect
+
+ - required
+ - placeHolder
+ - displayedValue
+ - value
+
+##dijit/form/ComboBox！
+组合select与textbox
+接收input事件
+
+ - required
+ - placeHolder
+ - value
+
+displayedValue=value（input标签模拟）
+
+---
+
+#Dijit Selects using Stores！
+##Select Widgets and dojo/store
+
+	new ComboBox({
+        name: "stateSelect",
+        store: stateStore,
+		placeHolder: "Select a State",
+        labelAttr: "name",
+		//防止下拉菜单导致整个页面变大
+        maxHeight: -1, // tells _HasDropDown to fit menu within viewport
+    }, <id>);
+
+##Using Stores with FilteringSelect and ComboBox
+
+ - searchAttr(搜索匹配属性，默认"name"，与store内对应)
+ - pageSize(显示数)
+
+##Using Stores with dijit/form/Select
+identities 只支持string
+
+	select.set("value", id)
+	
+	//widget.set("store", newStore) startUp后无效 
+	widget.setStore(newStore)
+
+##Creating dijit/form/Select without a Store
+
+options:
+
+ - label
+ - value
+ - selected
+ - disabled
+
+
+ - addOption
+ - removeOption
+ - set("options", arrayOfObjects)
+ - startup （更新后需要重复调用）
+
+---
+
+#Sliders with Dijit
+ dijit/form/HorizontalSlider dijit/form/VerticalSlider
+
+ - properties
+	 - clickSelect
+	 - disabled
+	 - discreteValues
+	 - intermediateChanges
+	 - maximum
+	 - minimum
+	 - name
+	 - pageIncrement
+	 - showButtons
+	 - value
+ - methods
+	 - decrement
+	 - increment
+	 - get
+	 - set
+ - events
+	 - onChange
+
+##Adding Rules and Rule Labels
+dijit/form/HorizontalRule, dijit/form/HorizontalRuleLabels, dijit/form/VerticalRule,dijit/form/VerticalRuleLabels
+
+---
+
+#Understanding _WidgetBase
+##Dijit Lifecycle
+
+ - constructor (common to all prototypes, called when instantiated)
+ - postscript (common to all prototypes built using declare)
+	 - create
+		 - postMixInProperties
+		 - buildRendering
+		 - postCreate
+ - startup
+	 - resize
+
+<!-- -->
+ 1. postscript
+ 2. create
+ 3. postMixInProperties
+ 4. buildRendering
+ 5. postCreate
+ 6. startup
+
+###postCreate()
+属性定义后，插入document前执行
+
+###startup()
+所有dom插入document后执行
+
+##Tear-down methods
+一般直接调用destroyRecursive即可
+
+ - destroyRecursive
+	 - destroyDescendants
+	 - destroy
+		 - uninitialize
+		 - destroyRendering
+
+##Node references
+domNode属性，在postCreate执行后生成，包含整个组件的节点
+
+containerNode：may contain content or widgets defined outside of your widget definition
+
+##Getters and Setters
+
+	// for the field "foo" in your widget:
+	
+	// custom getter
+	_getFooAttr: function(){ /* do something and return a value */ },
+	
+	//	custom setter
+	_setFooAttr: function(value){ /* do something to set a value */ }
+		
+	// get the value of "foo":
+	var value = myWidget.get("foo");
+	
+	// set the value of "foo":
+	myWidget.set("foo", someValue);
+
+##Owning handles
+
+	this.own(
+	    on(someDomNode, "click", lang.hitch(this, "myOnClickHandler)"),
+	    aspect.after(someObject, "someFunc", lang.hitch(this, "mySomeFuncHandler)"),
+	    topic.subscribe("/some/topic", function(){ ... }),
+	    ...
+	);
+
+##Pre-defined Properties and Events
+
+ - id: a unique string identifying the widget
+ - lang: a rarely-used string that can override the default Dojo locale
+ - dir: useful for bi-directional support
+ - class: the HTML class attribute for the widget's domNode
+ - style: the HTML style attribute for the widget's domNode
+ - title: most commonly, the HTML title attribute for native tooltips
+ - baseClass: the root CSS class of the widget
+ - srcNodeRef: the original DOM node that existed before it was "widgetified", if one was provided. Note that depending on the type of widget (e.g. templated widgets), this may be unset following postCreate, as the original node is discarded.
+
+##usage
+
+	dojo.declare("MyWidget", dijit._WidgetBase, { ... });
+	this.inherited(arguments)
+
+---
+
+#Creating Template-based Widgets
+_TemplatedMixin and _WidgetsInTemplateMixin
+
+###properties
+
+ - templateString
+
+###Overridden Methods
+
+ - buildRendering
+ - destroyRendering
+
+##Using _TemplatedMixin
+创建单独的文件夹保存模板
+
+	define([
+	    "dojo/_base/declare",
+	    "dijit/_WidgetBase",
+	    "dijit/_TemplatedMixin",
+	    "dojo/text!./templates/SomeWidget.html"
+	], function(declare, _WidgetBase, _TemplatedMixin, template) {
+	
+	    return declare([_WidgetBase, _TemplatedMixin], {
+	        templateString: template
+	    });
+	
+	});
+
+##Writing Templates
+只允许存在单个根节点
+	<div class="${baseClass}">
+	    <div class="${baseClass}Title" data-dojo-attach-point="titleNode"
+	            data-dojo-attach-event="onclick:_onClick"></div>
+	</div>
+
+ - variable substitution
+ - attach points
+ - event attachments
+
+###Variable Substitution
+建议模板中的引用值为static，如需修改，在postCreate内调用set
+
+	${property}
+	${propertyObject.property}
+	//强制避免转义
+	${!property}
+
+###Attach Points
+加入widget属性,绑定对应节点，domNode默认为模板根节点
+
+	data-dojo-attach-point
+
+#### containerNode Attach Point
+	//组件模板
+	<div class="${baseClass}">
+	    <div class="${baseClass}Title" data-dojo-attach-point="titleNode"
+	            data-dojo-attach-event="ondijitclick:_onClick"></div>
+	    <!-- And our container: -->
+	    <div class="${baseClass}Container"
+	            data-dojo-attach-point="containerNode"></div>
+	</div>
+	//组件声明式调用
+	<div data-dojo-type="demo/SomeWidget"
+	        data-dojo-props="title: 'Our Some Widget'">
+	    <p>This is arbitrary content!</p>
+	    <p>More arbitrary content!</p>
+	</div>
+	//被组件包裹的节点(包括其他组件)都成为了containerNode的子节点，组件会自动添加id
+	<div id="demo_SomeWidget_0" class="someWidgetBase">
+	    <div class="someWidgetTitle">Our Some Widget</div>
+	    <div class="someWidgetContainer">
+	        <p>This is arbitrary content!</p>
+	        <p>More arbitrary content!</p>
+	    </div>
+	</div>
+
+###Event Attachments

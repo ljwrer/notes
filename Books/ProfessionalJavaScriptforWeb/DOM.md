@@ -166,9 +166,9 @@ write()、 writeln()、 open()和 close()
  - className
 
 ####2. 取得特性
-getAttribute()、 setAttribute()和 removeAttribute()
 
- - params1 attrname,不区分大小写
+ - getAttribute()
+	 - params1 attrname,不区分大小写
  
 区分Element.attr/Element.getAttribute
 
@@ -178,6 +178,24 @@ getAttribute()、 setAttribute()和 removeAttribute()
  - onclick
 	 - getAttribute string
 	 - . function
+
+####3. 设置特性
+
+ - setAttribute()
+	 - attrname统一转换为小写形式
+	 - 支持自定义属性
+ - .attr
+	 - 自定义的属性不会自动成为元素的特性
+ - removeAttribute()
+
+####4. attributes 属性
+
+	Element.attributes instanceof NamedNodeMap
+
+ - getNamedItem(name)：返回 nodeName 属性等于 name 的节点
+ - removeNamedItem(name)：从列表中移除 nodeName 属性等于 name 的节点
+ - setNamedItem(node)：向列表中添加节点，以节点的 nodeName 属性为索引
+ - item(pos)：返回位于数字 pos 位置处的节点。
 
 
 	

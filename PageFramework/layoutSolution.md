@@ -23,14 +23,16 @@ text align:对子元素inline元素有效
 缺点：
 
 - child会继承text-align属性，需要单独调整
+
 ####table+margin####
 display:table类似display:block,但宽度为内容宽度  
 利用类似block定宽+margin:auto达到居中  
-	
+
 	.child{
 		display: table;
 		margin: 0 auto;
 	}
+	
 优点：
 
  - 只需设置child元素
@@ -190,7 +192,9 @@ flex-item默认align-items为stretch,撑满剩余空间，修改为center
 缺点：
 
  - css3兼容性问题
+
 ####flex+justify-content+align-items####
+
 	.parent{
 		display: flex;
 		justify-content: center;
@@ -213,6 +217,7 @@ flex-item默认align-items为stretch,撑满剩余空间，修改为center
 ##多列布局##
 ###定宽+自适应###
 ####float+margin####
+
 	.left{
 		width: 100px;
 		float: left;

@@ -407,18 +407,18 @@ left,right不耦合即可
 	- 兼容性
 <!-- -->
 
-	.parent{
-		display: flex;
-	}
-	.left{
-		margin-right: 20px;
-	}
-	.right{
-		flex: 1;
-	}
-	.left p{
-		width: 100px;
-	}
+		.parent{
+			display: flex;
+		}
+		.left{
+			margin-right: 20px;
+		}
+		.right{
+			flex: 1;
+		}
+		.left p{
+			width: 100px;
+		}
 
 ---
 ###多列不定宽+自适应###

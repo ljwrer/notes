@@ -234,6 +234,7 @@ flex-item默认align-items为stretch,撑满剩余空间，修改为center
  - right清除浮动会掉下去
  - IE6 3px缩进bug
 <!-- -->
+
 	#hack：
 	.left{
 		margin-right:-100px;
@@ -244,6 +245,7 @@ flex-item默认align-items为stretch,撑满剩余空间，修改为center
 3. position:relative提高层级 
 
 <!-- -->
+
 	.left{
 		width: 100px;
 		float: left;
@@ -305,6 +307,7 @@ BFC容器内容与外界隔离
 5. table-cell不能设置margin
 
 <!-- -->
+
 	.parent{
 		display: table;
 		width: 100%;
@@ -366,6 +369,7 @@ left,right不耦合即可
  - 内容由宽度决定:不设置宽度即可
 
 <!-- -->
+
 	.left{
 		float: left;
 		margin-right: 10px;
@@ -384,6 +388,7 @@ left,right不耦合即可
    		- left宽度为0.1%
 
 <!-- -->
+
 	.parent{
 		display: table;
 		width: 100%;
@@ -401,6 +406,7 @@ left,right不耦合即可
 - flex
 	- 兼容性
 <!-- -->
+
 	.parent{
 		display: flex;
 	}

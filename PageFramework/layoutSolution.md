@@ -235,10 +235,10 @@ flex-item默认align-items为stretch,撑满剩余空间，修改为center
  - IE6 3px缩进bug
 <!-- -->
 
-	#hack：
-	.left{
-		margin-right:-100px;
-	}
+		#hack：
+		.left{
+			margin-right:-100px;
+		}
 ####float+margin+(fix)####
 1. magrin-left为负，设置空白
 2. right-fix float消除clear：both bug

@@ -16,7 +16,7 @@ ELEMENT_NODE：nodeName==TagName
 
  -  childNodes
 	 -  NodeList 对象
-		 -  IE8及以下为COMd对象
+		 -  IE8及以下为COM对象
 	 -  .length
 	 -  动态
 	 -   [index]/.item[index]
@@ -192,10 +192,29 @@ write()、 writeln()、 open()和 close()
 
 	Element.attributes instanceof NamedNodeMap
 
+ - 动态
  - getNamedItem(name)：返回 nodeName 属性等于 name 的节点
- - removeNamedItem(name)：从列表中移除 nodeName 属性等于 name 的节点
+ - removeNamedItem(name)：从列表中移除 nodeName 属性等于 name 的节点，返回删除的attr节点
  - setNamedItem(node)：向列表中添加节点，以节点的 nodeName 属性为索引
  - item(pos)：返回位于数字 pos 位置处的节点。
+
+#####attributes遍历
+
+	function outputAttributes(element){
+		var pairs = new Array(),
+		attrName,
+		attrValue,
+		i,
+		len;
+		for (i=0, len=element.attributes.length; i < len; i++){
+		attrName = element.attributes[i].nodeName;
+		attrValue = element.attributes[i].nodeValue;
+		if (element.attributes[i].specified) {
+		pairs.push(attrName + "=\"" + attrValue + "\"");
+		}
+		}
+		return pairs.join(" ");
+	}
 
 
 	

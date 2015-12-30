@@ -676,3 +676,155 @@ _TemplatedMixin and _WidgetsInTemplateMixin
 	</div>
 
 ###Event Attachments
+
+ - 事件处理函数的参数通常和DOM事件一致
+ - dijit/_OnDijitClickMixin替换click
+
+	data-dojo-attach-event="onmouseenter:_onHover,onmouseleave:_onUnhover,ondijitclick:_onClick"
+
+###The _WidgetsInTemplateMixin Mixin
+在模板中插入其他widget
+
+	<div class="${baseClass}" data-dojo-attach-point="focusNode"
+	        data-dojo-attach-event="ondijitclick:_onClick"
+	        role="menuitem" tabIndex="-1">
+		//通过myWidget.buttonWidget访问dijit/form/Button
+		//即data-dojo-attach-point属于内部其他组件时，可访问内部其他组件，而不是dom节点
+	    <div data-dojo-type="dijit/form/Button"
+	        data-dojo-attach-point="buttonWidget">
+	        My Button
+	    </div>
+	    <span data-dojo-attach-point="containerNode"></span>
+	</div>
+
+ - 需要手动注入子组件
+ - 影响性能
+
+---
+
+#Dijit Themes, Buttons, and Textboxes
+##Using a Dijit theme
+1. 导入css
+2. body设置对应class
+3. 块级元素设置class只对块级元素内生效
+4. 弹出层必须设置body class
+
+##Buttons in Dijit
+
+ - iconClass: indicates what CSS class to use (to apply an image sprite)
+ - showLabel: determines whether to show any text in the button
+ - title: sets the value of the HTML title attribute on the rendered DOM node of the widget
+ - label: in programmatic usage, this indicates the content of the button label;declaratively, this is specified via the content (innerHTML) of the element representing the widget
+ - type:在form内或dijit/form/Form内可设为reset/submit
+ - 其他
+	 - dijit/form/ToggleButton
+	 - dijit/form/DropDownButton
+	 - dijit/form/ComboButton
+
+##The Dijit TextBox Family
+
+ - dijit/form/TextBox
+ - dijit/form/ValidationTextBox
+ - dijit/form/NumberTextBox
+ - dijit/form/DateTextBox
+ - dijit/form/TimeTextBox
+ - dijit/form/CurrencyTextBox
+ - dijit/form/NumberSpinner
+ - dijit/form/Textarea
+
+##HTML5 Multi-File Uploader
+
+ - 同样需要enctype="multipart/form-data"
+ - dojox/form/uploader/FileList 显示文件列表
+
+###Plugins
+
+	require(["dojox/form/uploader/plugins/Flash"], ...
+	require(["dojox/form/uploader/plugins/IFrame"], ...
+	require(["dojox/form/uploader/plugins/HTML5"], ...
+
+---
+
+#Forms and Validation
+dojox/validate
+
+	require(["dojox/validate"], function(validate) {});
+	validate.isInRange(test, options);
+	validate.isNumberFormat(test, options);
+	validate.isText(test, options);
+	validate.isValidLuhn(test);
+
+	//选项
+	var test = validate.isNumberFormat(someNum, { format: "(###) ###-####" });
+	var test = validate.isNumberFormat(someNum, {
+	    format: ["### ##", "###-##", "## ###"]
+	});
+	//插件
+	require(["dojox/validate/web"], function(validate) {
+	    validate.isEmailAddress(someAddress);
+	});
+
+##dojox/validate with HTML-based forms
+调用一些内置函数，几乎不可用
+	validate.check（form,profile）
+
+	// Since dojox/validate/check and dojox/validate/web just extend
+	// dojox/validate with new methods we don't need references to them
+	require([
+	    "dojox/validate",
+	    "dojox/validate/check",
+	    "dojox/validate/web"
+	], function(validate) {
+	    var profile = {
+	        trim: [ "field1", "field2" ],
+	        required: [ "field1", "pwd", "pwd2" ],
+	        constraints: {
+	            field1: myValidationFunction,
+	            field2: [validate.isEmailAddress, false, true]
+	        },
+	        confirm: {
+	            pwd2: "pwd"
+	        }
+	    }
+	
+	    //    later on in the app, probably onsubmit on the form:
+	    var results = validate.check(document.getElementById, profile);
+	});
+	
+ - isSuccessful()
+ - hasMissing()
+ - getMissing()
+ - isMissing(field)
+ - hasInvalid()
+ - getInvalid()
+ - isInvalid(field)
+
+##dojox/validate with Dijit-based Forms
+
+    data-dojo-type="dijit/form/ValidationTextBox"
+    data-dojo-props="validator:dojox.validate.isInRange,
+        constraints:{ min:10, max:100 },
+        invalidMessage:'This is not within the range of 10 to 100!'"
+
+---
+
+#Creating a custom widget
+
+ - app
+	 - data
+	 - widget
+		 - css
+		 - images
+		 - templates
+##Setup
+data.json:
+
+	[
+	    {
+	        "name": "Brian Arnold",
+	        "avatar": "/includes/authors/brian_arnold/avatar.jpg",
+	        "bio": "Brian Arnold is a software engineer at SitePen, Inc., ..."
+	    },
+	    /* More authors here... */
+	]
+

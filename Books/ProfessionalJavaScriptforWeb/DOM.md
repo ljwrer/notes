@@ -216,5 +216,22 @@ write()、 writeln()、 open()和 close()
 		return pairs.join(" ");
 	}
 
+####5. 创建元素
+
+ - document.createElement
+	 - @params1
+		 - tagName
+		 - string(IE7, 处理reset问题)
+
+####6. 元素的子节点
+
+ - childNodes
+ - getElementByTagName
+
+###10.1.4 Text类型
+
+ - nodeType:1
+ - nodeName:#text
+ - nodeValue == data
 
 	

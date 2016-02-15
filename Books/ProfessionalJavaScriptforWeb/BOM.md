@@ -45,7 +45,7 @@ moveTo(x,y) moveBy(x，y)
 	 - viewport
 
 			var pageWidth = window.innerWidth,
-		            pageHeight = window.innerHeight;
+		        pageHeight = window.innerHeight;
 		    if (typeof pageWidth != "number") {
 		        if (document.compatMode == "CSS1Compat") {
 		            pageWidth = document.documentElement.clientWidth;

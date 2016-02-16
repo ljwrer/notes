@@ -222,16 +222,215 @@ write()、 writeln()、 open()和 close()
 	 - @params1
 		 - tagName
 		 - string(IE7, 处理reset问题)
+	 - 添加ownerDocument属性
 
 ####6. 元素的子节点
 
  - childNodes
  - getElementByTagName
+ - 空白节点差异
 
 ###10.1.4 Text类型
 
  - nodeType:1
  - nodeName:#text
  - nodeValue == data
+ - parentNode.nodeType === Node.ELEMENT_NODE
+ - 无子节点
+ - length
 
-	
+方法：
+
+ - appendData(text)
+ - deleteData(offset, count)
+ - insertData(offset, text)
+ - replaceData(offset, count, text)
+ - splitText(offset)
+ - substringData(offset, count)
+ - 字符串会经过 HTML编码，符号转义
+
+####1. 创建文本节点
+
+ - document.createTextNode
+	 - @params
+		 - string
+		 - 转义
+	 - 添加ownerDocument属性
+
+####2. 规范化文本节点
+
+ - normalize
+	 - 合并文本节点
+
+####3. 分割文本节点
+
+ - spliteText
+	 - @params index(number)
+		 - 分割0-(index-1)
+	 - return
+		 - index-(length-1)
+
+###10.1.5 Comment类型
+
+ - nodeType:8
+ - nodeName:"#comment"
+ - nodeValue == data
+ - parentNode：Document/Element
+ - 无子节点。
+
+ - document.createComment
+	 - 需要作为html的子节点
+
+###10.1.6 CDATASection类型
+
+ - 继承自text类型，除spliteText
+ - nodeType:4
+ - nodeName："#cdata-section"
+ - nodeValue：CDATA 区域中的内容
+ - parentNode：Document/Element
+ - 无子节点
+ - 仅XML支持
+
+ -  document.createCDataSection
+
+###10.1.7 DocumentType类型
+
+ - IE不支持
+ - nodeType：10
+ - nodeName：doctype 的名称
+ - nodeValue：null
+ - parentNode:Document
+ - 无子节点
+ - document.doctype
+	 - name:html
+
+###10.1.8 DocumentFragment类型
+
+ - nodeType:11
+ - nodeName:"#document-fragment"
+ - nodeValue:null
+ - parentNode:null
+ - 子节点:Element/ProcessingInstruction/Comment/Text/CDATASection/EntityReference
+ - 缓存节点
+	 - 插入dom后清除子节点
+	 - 添加子节点后，子节点从dom移除
+ - document.createDocumentFragment()
+
+###10.1.9 Attr类型
+元素的 attributes 属性中的节点
+
+ - nodeType：2
+ - nodeName == name
+ - nodeValue == value
+ - parentNode：null
+ - HTML 中无子节点
+ - XML 中子节点可以是 Text 或 EntityReference
+ - 特性不被认为是 DOM 文档树的一部分
+
+ - specified：默认/指定
+
+不建议：
+
+ - document.createAttribute
+ - setAttributeNode
+ - getAttributeNode
+
+##10.2 DOM 操作技术
+###10.2.1 动态脚本
+
+	function loadScript(url){
+		var script = document.createElement("script");
+		script.type = "text/javascript";
+		script.src = url;
+		document.body.appendChild(script);
+	}
+
+	function loadScriptString(code){
+		var script = document.createElement("script");
+		script.type = "text/javascript";
+		try {
+			script.appendChild(document.createTextNode(code));
+		} catch (ex){
+			//IE
+			script.text = code;
+		}
+		document.body.appendChild(script);
+	}
+
+###10.2.2 动态样式
+
+	function loadStyles(url) {
+        var link = document.createElement("link");
+        link.rel = "stylesheet";
+        link.type = "text/css";
+        link.href = url;
+        var head = document.getElementsByTagName("head")[0];
+        head.appendChild(link);
+    }
+
+	function loadStyleString(css) {
+        var style = document.createElement("style");
+        style.type = "text/css";
+        try {
+            style.appendChild(document.createTextNode(css));
+        } catch (ex) {
+            style.styleSheet.cssText = css;
+        }
+        var head = document.getElementsByTagName("head")[0];
+        head.appendChild(style);
+    }
+
+styleSheet.cssText，IE中重写或为空时可能崩溃
+
+###10.2.3 操作表格
+HTML DOM方法：
+
+table：
+
+ - caption
+ - tBodies
+ - tFoot
+ - tHead
+ - rows
+ - createTHead()
+ - createTFoot()
+ - createCaption()
+ - deleteTHead()
+ - deleteTFoot()
+ - deleteCaption()
+ - deleteRow(pos)
+ - insertRow(pos)
+ - 没有tbody..
+
+tbody：
+
+ - rows
+ - deleteRow(pos)
+ - insertRow(pos)
+
+tr：
+
+ - cells
+ - deleteCell(pos)
+ - insertCell(pos)
+
+###10.2.4 使用NodeList
+
+ - NodeList,NamedNodeMap,HTMLCollection皆为动态，如getElementsByTagName/getElementsByClassName的返回
+ - 尽量减少整个NodeList的遍历
+ - 缓存NodeList的属性
+	 - var len=SomeNodeList.length
+
+##小结
+DOM 是语言中立的 API，用于访问和操作 HTML 和 XML 文档。 DOM1 级将 HTML 和 XML 文档形象地看作一个层次化的节点树，可以使用 JavaScript 来操作这个节点树，进而改变底层文档的外观和结构。
+
+DOM 由各种节点构成，简要总结如下。
+
+ - 最基本的节点类型是 Node，用于抽象地表示文档中一个独立的部分；所有其他类型都继承自Node。
+ - Document 类型表示整个文档，是一组分层节点的根节点。在 JavaScript 中， document 对象是Document 的一个实例。使用 document 对象，有很多种方式可以查询和取得节点。
+ - Element 节点表示文档中的所有 HTML 或 XML 元素，可以用来操作这些元素的内容和特性。
+ - 另外还有一些节点类型，分别表示文本内容、注释、文档类型、 CDATA 区域和文档片段。
+
+访问 DOM 的操作在多数情况下都很直观，不过在处理`<script>`和`<style>`元素时还是存在一些复杂性。由于这两个元素分别包含脚本和样式信息，因此浏览器通常会将它们与其他元素区别对待。这些区别导致了在针对这些元素使用 innerHTML 时，以及在创建新元素时的一些问题。
+
+理解 DOM 的关键，就是理解 DOM 对性能的影响。 DOM 操作往往是 JavaScript 程序中开销最大的部分，而因访问 NodeList 导致的问题为最多。 NodeList 对象都是“动态的”，这就意味着每次访问NodeList 对象，都会运行一次查询。有鉴于此，最好的办法就是尽量减少 DOM 操作。

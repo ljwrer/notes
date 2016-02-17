@@ -92,8 +92,8 @@ IE8+:
 
  - document.doctype
 	 - 浏览器支持不一致
- - document.documentElement
- - document.body
+ - document.documentElement == html
+ - document.body == body
 
 ####2. 文档信息
 

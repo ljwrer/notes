@@ -148,11 +148,12 @@
 	 - ES6
  - 库和框架
 	 - css：sass,compass,Animate.css
-	 - MVVM：vue
-	 - Flux：vuex
-	 - DOM库：jQuery,Dojo,Zepto,video.js,velocity.js
-	 - 工具库：EventEmitter,es5-shim,underscore,babel
-	 - 移动端：flexible.js,iScroll,swiper,微信js-sdk
+	 - MVVM/Flux：vue,vuex
+	 - DOM库：jQuery,Dojo,Zepto,velocity.js
+	 - 工具库：EventEmitter,es5-shim,underscore,lodash,babel
+	 - 移动端：flexible.js,IScroll,微信js-sdk
+	 - 图表：Echarts
+	 - hybrid app:cordova,Crosswalk
  - 工程化
 	 - 版本控制：Git,SVN
 	 - 模块化：AMD(RequireJS),CMD(seajs),CommonJS

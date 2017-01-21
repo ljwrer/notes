@@ -14,7 +14,7 @@
  - 性别：男
  - 出生年月：1991年11月7日
  - 现居城市：长沙
- - 工作年限：3年
+ - 工作年限：4年
  - Github： [https：//github.com/ljwrer](https：//github.com/ljwrer)
  - Blog： [http：//ljwrer.github.io](http：//ljwrer.github.io)
 
@@ -33,10 +33,16 @@
 
 # 工作经历
 
+##易观智库
+
+- 所任职位：Web前端开发工程师
+- 起止年月：2016年10月至今
+- 所在部门：技术群组
+
 ##步步高电商（云猴网）
 
 - 所任职位：Web前端开发工程师
-- 起止年月：2015年10月至今
+- 起止年月：2015年10月至2016年10月
 - 所在部门：UED
 
 ##湖南荣乐科技有限公司
@@ -61,34 +67,47 @@
 ---
 
 #项目经历
+## 易观新官网
+ - 项目特点：基于pjax兼顾用户体验与seo
+ - 职责：
+	 - api请求管道化工具开发
+	 - cas-client 单点登录node实现
+
+## 易观千帆年度H5
+ - 项目地址：[http://m.analysys.cn/activity/qianfan20170103/](http://m.analysys.cn/activity/qianfan20170103/)
+ - 项目类型：微信H5专题
+ - 职责：
+	 - 前端路由实现
+	 - 基于canvas实时生成微信长按保存图片
+
+## 易观方舟
+ - 项目地址：[http://dev.analysys.cn/](http://dev.analysys.cn/)
+ - 项目类型：数据可视化
+ - 职责：
+	 - 图表通用配置提取工具开发
+	 - 图表生命周期
+	 - 数字滚动动画
+	 - 分别基于canvas和svg的贝塞尔曲线轨迹动画实现
+
+## 易观官网性能优化
+ - 项目地址：[http://www.analysys.cn](http://www.analysys.cn "http://www.analysys.cn")
+ - 职责：
+	 - 基于gulp+webpack的工作流及构建
+
 ##步步高门店管理系统
- - 项目地址：内部系统
  - 项目类型：Hybrid App
- - 平台：Android/IOS/Web
  - 职责：
 	 - 集成vue与Echarts
-	 - 无状态组件编写
-	 - JavaScript与Native交互
- - 技术选型：
-	 - MVVM：vue
-	 - Flux：vuex
-	 - router：vue-router
-	 - js：ES6
-	 - UI：sui+vux
-	 - charting：Echarts
-	 - css：less
-	 - middleware：express
-	 - build：webpack
-	 - framework：cordova+Crosswalk
+	 - stateless组件编写
+	 - cordova与Native交互
+	 - 全局vuex状态管理
 
 ##步步高微信公众号
 
  - 项目地址：[http：//wx.yunhou.com](http：//wx.yunhou.com)
- - 项目类型：微信公众号
  - 职责：
 	 - 公用消息系统
-	 - 退货模块，商务卡模块，客服列表页
- - 技术选型：Zepto+iScroll+微信js-sdk+flexible.js+seajs+sass/compass+fis+EJS+express
+	 - 退货模块，商务卡模块，客服模块
 
 ##步步高B2B订货平台
 
@@ -97,67 +116,45 @@
  - 职责：
 	 - 新闻公告，密码修改，收藏管理模块
 	 - 面包屑组件，标签管理组件，按钮组件
-	 - 公用css
- - 技术选型：jQuery+seajs+EventEmitter+sass/compass+fis
+	 - 公用样式提取
+
 
 ##步步高会员年度幸福指数专题
 
  - 项目地址：[http：//wx.yunhou.com/activity/memberData2016](http：//wx.yunhou.com/activity/memberData2016)
- - 项目类型：微信滚动页，类支付宝年度账单
- - 职责：
-	 - 所有前端工作
-	 - node接口，路由，模板填充
- - 技术选型：Zepto+Swiper+微信js-sdk+flexible.js+seajs+sass/compass+gulp+express+EJS
+ - 职责：node接口，路由，模板填充
 
 ##云猴网OMS系统优化
-
- - 项目地址：内部后台系统
- - 项目类型：订单管理系统
- - 职责：前端性能优化
- - 技术选型：Dojo+stylus+CoffeeScript
- - 优化工具：Dojo build,r.js
-
-##盛大金禧千店贷
-
- - 项目地址：[http：//www.1000dd.com](http：//www.1000dd.com)
- - 项目类型：互联网金融P2P网贷
- - 职责：所有专题页前端部分
- - 技术选型：jQuery+Animate.css 
+ - 工具：Dojo build,r.js
 
 ##网易Web前端开发实践
  - 项目地址：[https：//github.com/ljwrer/FEHomework](https：//github.com/ljwrer/FEHomework)
  - demo：[http：//ljwrer.github.io/FEHomework/](http：//ljwrer.github.io/FEHomework/)
- - 项目要求：
-	 - 兼容IE8+
-	 - 使用原生JavaScript
-	 - 宽屏窄屏自适应布局
-	 - 使用Ajax异步刷新页面
+ - 项目要求：IE8+,原生JavaScript,宽屏窄屏自适应布局,使用Ajax异步刷新页面
 
 ---
 
 # 技能清单
- - html+css
-	 - 布局
-	 - 响应式
-	 - 移动端适配
- - html5+css3
-	 - 弹性布局
-	 - 渐变，阴影与圆角,3D变形与动画
+ - html+css：
+	 - 布局,响应式,移动端适配
+	 - css3弹性布局,3D变形与动画
  - JavaScript
-	 - Vanilla JS
 	 - ES6
+	 - canvas
  - 库和框架
-	 - css：sass,compass,Animate.css
+	 - css：sass,compass,Bourbon,Animate.css
 	 - MVVM/Flux：vue,vuex
 	 - DOM库：jQuery,Dojo,Zepto,velocity.js
-	 - 工具库：EventEmitter,es5-shim,underscore,lodash,babel
-	 - 移动端：flexible.js,IScroll,微信js-sdk
+	 - canvas:fabric
+	 - 工具库：lodash
+	 - 移动端：flexible.js,IScroll
 	 - 图表：Echarts
 	 - hybrid app:cordova,Crosswalk
  - 工程化
-	 - 版本控制：Git,SVN
-	 - 模块化：AMD(RequireJS),CMD(seajs),CommonJS
+	 - 版本控制：Git,
+	 - 模块化：AMD,CMD,UMD,CommonJS
  - node
 	 - 自动化：gulp,webpack,bower,yeoman
 	 - 模板引擎：EJS
-	 - 中间件：express
+	 - 框架：express
+	 - 数据库：MongoDB,mongoose

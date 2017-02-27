@@ -104,6 +104,8 @@ click函数形成了一个覆盖整个作用域的闭包，JavaScript引擎极�
 	    console.log("button clicked");
 	}, false );
 
+>创建匿名函数注意外部变量
+
 #第 4 章　提升
 var和函数声明都会提升
 ##4.3　函数优先

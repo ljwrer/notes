@@ -215,3 +215,15 @@ var coolcat = function (spec) {
 var myCoolCat = coolcat({name: 'Bix'});
 var name = myCoolCat.get_name(  );
 ```
+
+# 第6章 数组
+### 删除
+splice
+
+### isArray
+```
+var is_array = function (value) {
+    return Object.prototype.toString.apply(value) === '[object Array]';
+};
+```
+

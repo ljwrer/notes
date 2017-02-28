@@ -279,3 +279,16 @@ new Regexp 双写反斜杠
 ```
 - / [ \ ] ^
 ```
+
+# 其他
+### parseInt 传入第二个参数
+### 禁用自增自减
+### NAN
+```
+function isNumber(value) { return typeof value === 'number' && isFinite(value);}
+```
+### 对象
+hasOwnProperty
+
+### 移除continue 
+### 禁用位运算（接触不到硬件）

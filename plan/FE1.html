@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>FE</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+/* GitHub stylesheet for MarkdownPad (http://markdownpad.com) */
+/* Author: Nicolas Hery - http://nicolashery.com */
+/* Version: b13fe65ca28d2e568c6ed5d7f06581183df8f2ff */
+/* Source: https://github.com/nicolahery/markdownpad-github */
+
+/* RESET
+=============================================================================*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* BODY
+=============================================================================*/
+
+body {
+  font-family: Helvetica, arial, freesans, clean, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
+  padding: 20px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+body>*:first-child {
+  margin-top: 0 !important;
+}
+
+body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* BLOCKS
+=============================================================================*/
+
+p, blockquote, ul, ol, dl, table, pre {
+  margin: 15px 0;
+}
+
+/* HEADERS
+=============================================================================*/
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {
+  font-size: inherit;
+}
+
+h1 {
+  font-size: 28px;
+  color: #000;
+}
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #ccc;
+  color: #000;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+h6 {
+  color: #777;
+  font-size: 14px;
+}
+
+body>h2:first-child, body>h1:first-child, body>h1:first-child+h2, body>h3:first-child, body>h4:first-child, body>h5:first-child, body>h6:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+h1+p, h2+p, h3+p, h4+p, h5+p, h6+p {
+  margin-top: 10px;
+}
+
+/* LINKS
+=============================================================================*/
+
+a {
+  color: #4183C4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* LISTS
+=============================================================================*/
+
+ul, ol {
+  padding-left: 30px;
+}
+
+ul li > :first-child, 
+ol li > :first-child, 
+ul li ul:first-of-type, 
+ol li ol:first-of-type, 
+ul li ol:first-of-type, 
+ol li ul:first-of-type {
+  margin-top: 0px;
+}
+
+ul ul, ul ol, ol ol, ol ul {
+  margin-bottom: 0;
+}
+
+dl {
+  padding: 0;
+}
+
+dl dt {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+  padding: 0;
+  margin: 15px 0 5px;
+}
+
+dl dt:first-child {
+  padding: 0;
+}
+
+dl dt>:first-child {
+  margin-top: 0px;
+}
+
+dl dt>:last-child {
+  margin-bottom: 0px;
+}
+
+dl dd {
+  margin: 0 0 15px;
+  padding: 0 15px;
+}
+
+dl dd>:first-child {
+  margin-top: 0px;
+}
+
+dl dd>:last-child {
+  margin-bottom: 0px;
+}
+
+/* CODE
+=============================================================================*/
+
+pre, code, tt {
+  font-size: 12px;
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+}
+
+code, tt {
+  margin: 0 0px;
+  padding: 0px 0px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px;
+}
+
+pre>code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent;
+}
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px;
+}
+
+pre code, pre tt {
+  background-color: transparent;
+  border: none;
+}
+
+kbd {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #DDDDDD;
+    background-image: linear-gradient(#F1F1F1, #DDDDDD);
+    background-repeat: repeat-x;
+    border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;
+    border-image: none;
+    border-radius: 2px 2px 2px 2px;
+    border-style: solid;
+    border-width: 1px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 10px;
+    padding: 1px 4px;
+}
+
+/* QUOTES
+=============================================================================*/
+
+blockquote {
+  border-left: 4px solid #DDD;
+  padding: 0 15px;
+  color: #777;
+}
+
+blockquote>:first-child {
+  margin-top: 0px;
+}
+
+blockquote>:last-child {
+  margin-bottom: 0px;
+}
+
+/* HORIZONTAL RULES
+=============================================================================*/
+
+hr {
+  clear: both;
+  margin: 15px 0;
+  height: 0px;
+  overflow: hidden;
+  border: none;
+  background: transparent;
+  border-bottom: 4px solid #ddd;
+  padding: 0;
+}
+
+/* TABLES
+=============================================================================*/
+
+table th {
+  font-weight: bold;
+}
+
+table th, table td {
+  border: 1px solid #ccc;
+  padding: 6px 13px;
+}
+
+table tr {
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+/* IMAGES
+=============================================================================*/
+
+img {
+  max-width: 100%
+}
+</style>
+</head>
+<body>
+<h1>求职意向：Web前端开发工程师</h1>
+<hr />
+<h1>联系方式</h1>
+<ul>
+<li>手机：15388017559</li>
+<li>Email：rayjump@163.com</li>
+</ul>
+<hr />
+<h1>个人信息</h1>
+<ul>
+<li>姓名：雷佳旺</li>
+<li>性别：男</li>
+<li>出生年月：1991年11月7日</li>
+<li>现居城市：长沙</li>
+<li>工作年限：4年</li>
+<li>Github： <a href="https：//github.com/ljwrer">https：//github.com/ljwrer</a></li>
+<li>Blog： <a href="http：//ljwrer.github.io">http：//ljwrer.github.io</a></li>
+</ul>
+<hr />
+<h1>教育背景</h1>
+<ul>
+<li>学历：大学本科</li>
+<li>毕业院校：西安电子科技大学</li>
+<li>所学专业：通信工程学院 信息工程</li>
+<li>入学和毕业年份：2009年-2013年</li>
+<li>学制：全日制</li>
+<li>外语：CET4 548</li>
+</ul>
+<hr />
+<h1>相关工作经历</h1>
+<h2>易观智库</h2>
+<ul>
+<li>所任职位：Web前端开发工程师</li>
+<li>起止年月：2016年10月至今</li>
+<li>所在部门：技术群组</li>
+</ul>
+<h2>步步高电商（云猴网）</h2>
+<ul>
+<li>所任职位：Web前端开发工程师</li>
+<li>起止年月：2015年10月至2016年10月</li>
+<li>所在部门：UED</li>
+</ul>
+<h2>湖南荣乐科技有限公司</h2>
+<ul>
+<li>所任职位：Web前端开发工程师</li>
+<li>起止年月：2015年4月至2015年10月</li>
+<li>所在部门：研发部</li>
+</ul>
+<h2>长沙高新开发区盛大金禧金融服务有限公司</h2>
+<ul>
+<li>所任职位：Web前端开发工程师</li>
+<li>起止年月：2014年7月 ~ 2015年4月</li>
+<li>所在部门：研发部</li>
+</ul>
+<hr />
+<h1>项目经历</h1>
+<h2>易观-客户统一视图</h2>
+<ul>
+<li>项目类型：ecif</li>
+<li>
+职责：
+<ul>
+<li>项目架构</li>
+<li>表格组件，支持排序，搜索，分页，编辑及扩展</li>
+<li>列表页开发</li>
+</ul>
+</li>
+</ul>
+<h2>易观-德勤第四张报表</h2>
+<ul>
+<li>项目地址：<a href="http://4th.analysys.cn" title="http://4th.analysys.cn">http://4th.analysys.cn</a></li>
+<li>
+职责：
+<ul>
+<li>核心交易流程</li>
+<li>登录状态管理</li>
+<li>反馈页面(vue)</li>
+</ul>
+</li>
+</ul>
+<h2>易观新官网</h2>
+<ul>
+<li>项目特点：基于pjax兼顾用户体验与seo</li>
+<li>项目地址：<a href="http://www.analysys.cn" title="http://www.analysys.cn">http://www.analysys.cn</a></li>
+<li>
+职责：
+<ul>
+<li>api pipeline</li>
+<li>webp static server</li>
+<li>cas-client 单点登录node实现</li>
+<li>首页动画交互设计与实现</li>
+</ul>
+</li>
+</ul>
+<h2>易观千帆年度H5</h2>
+<ul>
+<li>项目地址：<a href="http://m.analysys.cn/activity/qianfan20170103/">http://m.analysys.cn/activity/qianfan20170103/</a></li>
+<li>项目类型：微信H5专题</li>
+<li>
+职责：
+<ul>
+<li>前端路由实现</li>
+<li>基于canvas实时生成微信长按保存图片</li>
+</ul>
+</li>
+</ul>
+<h2>易观方舟</h2>
+<ul>
+<li>项目地址：<a href="http://dev.analysys.cn/">http://dev.analysys.cn/</a></li>
+<li>项目类型：数据可视化</li>
+<li>
+职责：
+<ul>
+<li>图表通用配置提取工具开发</li>
+<li>图表生命周期</li>
+<li>数字滚动动画</li>
+<li>分别基于canvas和svg的贝塞尔曲线轨迹动画实现</li>
+</ul>
+</li>
+</ul>
+<h2>易观官网性能优化</h2>
+<ul>
+<li>职责：基于gulp+webpack的工作流及构建</li>
+</ul>
+<h2>步步高门店管理系统</h2>
+<ul>
+<li>项目类型：Hybrid App</li>
+<li>
+职责：
+<ul>
+<li>集成vue与Echarts</li>
+<li>stateless组件编写</li>
+<li>cordova与Native交互</li>
+<li>全局vuex状态管理</li>
+</ul>
+</li>
+</ul>
+<h2>步步高微信公众号</h2>
+<ul>
+<li>项目地址：<a href="http：//wx.yunhou.com">http：//wx.yunhou.com</a></li>
+<li>
+职责：
+<ul>
+<li>公用消息系统</li>
+<li>退货模块，商务卡模块，客服模块</li>
+</ul>
+</li>
+</ul>
+<h2>步步高B2B订货平台</h2>
+<ul>
+<li>项目地址：<a href="http：//b2bsale.bbg.com.cn">http：//b2bsale.bbg.com.cn</a></li>
+<li>项目类型：B2B商城</li>
+<li>
+职责：
+<ul>
+<li>新闻公告，密码修改，收藏管理模块</li>
+<li>面包屑组件，标签管理组件，按钮组件</li>
+<li>公用样式提取</li>
+</ul>
+</li>
+</ul>
+<h2>步步高会员年度幸福指数专题</h2>
+<ul>
+<li>项目地址：<a href="http：//wx.yunhou.com/activity/memberData2016">http：//wx.yunhou.com/activity/memberData2016</a></li>
+<li>职责：node接口，路由，模板填充</li>
+</ul>
+<h2>云猴网OMS系统优化</h2>
+<ul>
+<li>工具：Dojo build,r.js</li>
+</ul>
+<h2>网易Web前端开发实践</h2>
+<ul>
+<li>项目地址：<a href="https：//github.com/ljwrer/FEHomework">https：//github.com/ljwrer/FEHomework</a></li>
+<li>demo：<a href="http：//ljwrer.github.io/FEHomework/">http：//ljwrer.github.io/FEHomework/</a></li>
+<li>项目要求：IE8+,原生JavaScript,宽屏窄屏自适应布局,使用Ajax异步刷新页面</li>
+</ul>
+<hr />
+<h1>技能清单</h1>
+<ul>
+<li>
+html+css：
+<ul>
+<li>布局,响应式,移动端适配</li>
+<li>css3弹性布局,3D变形与动画</li>
+</ul>
+</li>
+<li>
+JavaScript
+<ul>
+<li>ES6</li>
+<li>canvas,svg</li>
+</ul>
+</li>
+<li>
+库和框架
+<ul>
+<li>css：sass,compass,Bourbon,Animate.css</li>
+<li>MVVM/Flux：vue,vuex,react</li>
+<li>DOM：jQuery,Dojo,Zepto,velocity.js</li>
+<li>canvas:fabric</li>
+<li>util：lodash</li>
+<li>mobile：flexible.js,IScroll</li>
+<li>chart：Echarts</li>
+<li>hybrid app:cordova,Crosswalk</li>
+</ul>
+</li>
+<li>
+工程化
+<ul>
+<li>版本控制：git,git flow</li>
+<li>模块化：AMD,CMD,UMD,CommonJS</li>
+<li>ci:Jenkins</li>
+</ul>
+</li>
+<li>
+node
+<ul>
+<li>自动化：gulp,webpack,bower,yeoman</li>
+<li>模板引擎：EJS</li>
+<li>框架：express</li>
+<li>数据库：MongoDB,mongoose</li>
+</ul>
+</li>
+</ul>
+
+</body>
+</html>
+<!-- This document was created with MarkdownPad, the Markdown editor for Windows (http://markdownpad.com) -->

@@ -31,7 +31,7 @@
 
 ---
 
-# 工作经历
+# 相关工作经历
 
 ##易观智库
 
@@ -58,20 +58,30 @@
 - 起止年月：2014年7月 ~ 2015年4月
 - 所在部门：研发部
 
-##湖南源科高新技术有限公司
-
-- 所任职位：技术支持工程师
-- 起止年月：2013年7月 ~ 2014年5月
-- 所在部门：大工业事业部
-
 ---
 
 #项目经历
+## 易观-客户统一视图
+ - 项目类型：ecif
+ - 职责：
+	 - 项目架构
+	 - 表格组件，支持排序，搜索，分页，编辑及扩展
+	 - 列表页开发
+## 易观-德勤第四张报表
+ - 项目地址：[http://4th.analysys.cn](http://4th.analysys.cn "http://4th.analysys.cn")
+ - 职责：
+	 - 核心交易流程
+	 - 登录状态管理
+	 - 反馈页面(vue)
+
 ## 易观新官网
  - 项目特点：基于pjax兼顾用户体验与seo
+ - 项目地址：[http://www.analysys.cn](http://www.analysys.cn "http://www.analysys.cn")
  - 职责：
-	 - api请求管道化工具开发
+	 - api pipeline
+	 - webp static server
 	 - cas-client 单点登录node实现
+	 - 首页动画交互设计与实现
 
 ## 易观千帆年度H5
  - 项目地址：[http://m.analysys.cn/activity/qianfan20170103/](http://m.analysys.cn/activity/qianfan20170103/)
@@ -90,9 +100,7 @@
 	 - 分别基于canvas和svg的贝塞尔曲线轨迹动画实现
 
 ## 易观官网性能优化
- - 项目地址：[http://www.analysys.cn](http://www.analysys.cn "http://www.analysys.cn")
- - 职责：
-	 - 基于gulp+webpack的工作流及构建
+ - 职责：基于gulp+webpack的工作流及构建
 
 ##步步高门店管理系统
  - 项目类型：Hybrid App
@@ -140,19 +148,20 @@
 	 - css3弹性布局,3D变形与动画
  - JavaScript
 	 - ES6
-	 - canvas
+	 - canvas,svg
  - 库和框架
 	 - css：sass,compass,Bourbon,Animate.css
-	 - MVVM/Flux：vue,vuex
-	 - DOM库：jQuery,Dojo,Zepto,velocity.js
+	 - MVVM/Flux：vue,vuex,react
+	 - DOM：jQuery,Dojo,Zepto,velocity.js
 	 - canvas:fabric
-	 - 工具库：lodash
-	 - 移动端：flexible.js,IScroll
-	 - 图表：Echarts
+	 - util：lodash
+	 - mobile：flexible.js,IScroll
+	 - chart：Echarts
 	 - hybrid app:cordova,Crosswalk
  - 工程化
-	 - 版本控制：Git,
+	 - 版本控制：git,git flow
 	 - 模块化：AMD,CMD,UMD,CommonJS
+	 - ci:Jenkins
  - node
 	 - 自动化：gulp,webpack,bower,yeoman
 	 - 模板引擎：EJS

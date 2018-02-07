@@ -369,3 +369,83 @@ function step(gen) {
 	};
 }
 ```
+>注意 yield 赋值问题    const a = b + yield ,此时b已赋值,如同const变量
+
+## 4.2　生成器产生值
+### 4.2.1　生产者与迭代器
+实现标准的迭代器接口：
+```
+var something = (function () {
+    var nextVal;
+    return {
+// for..of循环需要
+        [Symbol.iterator]: function () {
+            return this;
+        },
+// 标准迭代器接口方法
+        next: function () {
+            if (nextVal === undefined) {
+                nextVal = 1;
+            }
+            else {
+                nextVal = (3 * nextVal) + 6;
+            }
+            return {done: false, value: nextVal};
+        }
+    };
+})();
+```
+next() 调用返回一个对象。这个对象有两个属性： done 是一个 boolean 值，标识迭代器的完成状态； value 中放置迭代值
+ES6 还新增了一个 for..of 循环，这意味着可以通过原生循环语法自动迭代标准迭代器：
+
+### 4.2.2　iterable
+从一个 iterable 中提取迭代器的方法是：iterable 必须支持一个函数，其名称是专门的 ES6 符号值 Symbol.iterator 。调用这个函数时，它会返回一个迭代器。通常每次调用会返回一个全新的迭代器，虽然这一点并不是必须的。
+
+### 4.2.3　生成器迭代器
+生成器把 while..true 带回了 JavaScript 编程的世界
+因为生成器会在每个 yield 处暂停，函数 *something() 的状态（作用域）会被保持，即意味着不需要闭包在调用之间保持变量状态。
+
+生成器的迭代器也有一个 Symbol.iterator 函数，基本上这个函数做的就是 returnthis 。换句话说，生成器的迭代器也是一个iterable 
+```
+const gen = function* () {}
+const it = gen()
+console.log(it[Symbol.iterator]()===it) //true
+```
+
+#### 停止生成器
+for..of 循环的“异常结束”（也就是“提前终止”），通常由 break 、 return 或者未捕获异常引起，会向生成器的迭代器发送一个信号使其终止。
+>在循环正常结束之后，for..of 循环也会向迭代器发送这个信号。对于生成器来说，这本质上是没有意义的操作，因为生成器的迭代器需要先完成 for..of 循环才能结束。但是，自定义的迭代器可能会需要从 for..of循环的消费者那里接收这个额外的信号
+
+##### 手工发送信号
+1. try..finally
+```
+const gen = function* () {
+    let i = 0
+    try{
+        while (true){
+            yield i++
+        }
+    }finally {
+        console.log('finish')
+    }
+}
+```
+
+2. return/throw
+```
+const gen = function* () {
+    let i = 0
+    while (true){
+        yield i++
+    }
+}
+const it = gen()
+for(const i of it){
+    console.log(i)
+    if(i>3){
+		const res = it.return('x')
+        console.log(res) //{value:'x',done:true}
+    }
+}
+```
+

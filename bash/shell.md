@@ -30,10 +30,7 @@
 
 ### 快捷键
 
-
-
 <table class="multi">
-<caption class="cap">表3-1: cd 快捷键</caption>
 <thead>
 <tr>
 <th class="title">快捷键</th>
@@ -55,6 +52,14 @@
 </tr>
 </tbody>
 </table>
+
+Linux文件名的重要规则
+
+ - 以 “.” 字符开头的文件名是隐藏文件
+ - 文件名和命令名是大小写敏感的
+ - 没有“文件扩展名”的概念
+ - 支持长文件名，文件名可能包含空格，标点符号，但标点符号仅限 使用 “.”，“－”，下划线。(不要在文件名中使用空格)
+
 
 ---
 
@@ -113,6 +118,13 @@
 ## 选项和参数
 
 	command -options arguments
+
+## file
+```
+file filename
+获取文件类型
+```
+>一切皆文件
 
 ## less
 

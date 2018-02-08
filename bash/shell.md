@@ -1,3 +1,4 @@
+# 1. Basic
 ## 用户
 *#*：超级用户（管理员）权限
 *$*:普通用户
@@ -63,7 +64,7 @@ Linux文件名的重要规则
 
 ---
 
-# Linux 操作系统
+# 2.Linux 操作系统
 
 * ls — 列出目录内容
 
@@ -318,8 +319,327 @@ file filename
 [http://www.pathname.com/fhs/](http://www.pathname.com/fhs/)
 
 ## 符号链接
+符号链接（也称为软链接或者 symlink ）
 一个文件被多个文件名所指向
+```
+lrwxrwxrwx 1 root root 11 2007-08-11 07:34 libc.so.6 -> libc-2.6.so
+```
+`l`代表符号链接
+
+还有一种链接类型，叫做硬链接。硬链接同样允许文件有多个名字， 但是硬链接以不同的方法来创建多个文件名
+
 
 ---
 
-# 操作文件和目录
+# 3.操作文件和目录
+ - cp — 复制文件和目录
+ - mv — 移动/重命名文件和目录
+ - mkdir — 创建目录
+ - rm — 删除文件和目录
+ - ln — 创建硬链接和符号链接
+
+命令行程序，功能强大灵活。虽然图形文件管理器能轻松地实现简单的文件操作，但是对于 复杂的文件操作任务，则使用命令行程序比较容易完成
+
+## 通配符
+
+接受文件名作为参数的任何命令，都可以使用通配符
+
+<table class="multi">
+<tr>
+<th class="title">通配符</th>
+<th class="title">意义</th>
+</tr>
+<tr>
+<td valign="top">*</td>
+<td valign="top">匹配任意多个字符（包括零个或一个）</td>
+</tr>
+<tr>
+<td valign="top">?</td>
+<td valign="top">匹配任意一个字符（不包括零个）</td>
+</tr>
+<tr>
+<td valign="top">[characters]</td>
+<td valign="top">匹配任意一个属于字符集中的字符</td>
+</tr>
+<tr>
+<td valign="top">[!characters]</td>
+<td valign="top">匹配任意一个不是字符集中的字符</td>
+</tr>
+<tr>
+<td valign="top" width="25%">[[:class:]]</td>
+<td valign="top">匹配任意一个属于指定字符类中的字符</td>
+</tr>
+</table>
+
+### 普遍使用的字符类
+
+<table class="multi">
+<tr>
+<th class="title">字符类</th>
+<th class="title">意义</th>
+</tr>
+<tr>
+<td>[:alnum:]</td>
+<td>匹配任意一个字母或数字</td>
+</tr>
+<tr>
+<td>[:alpha:]</td>
+<td>匹配任意一个字母</td>
+</tr>
+<tr>
+<td>[:digit:]</td>
+<td>匹配任意一个数字</td>
+</tr>
+<tr>
+<td>[:lower:]</td>
+<td>匹配任意一个小写字母</td>
+</tr>
+<tr>
+<td width="25%">[:upper:]</td>
+<td>匹配任意一个大写字母</td>
+</tr>
+</table>
+
+### 通配符范例
+<table class="multi">
+<tr>
+<th class="title">模式</th>
+<th class="title">匹配对象</th>
+</tr>
+<tr>
+<td valign="top">*</td>
+<td valign="top">所有文件</td>
+</tr>
+<tr>
+<td valign="top">g*</td>
+<td valign="top">文件名以“g”开头的文件</td>
+</tr>
+<tr>
+<td valign="top">b*.txt</td>
+<td valign="top">以"b"开头，中间有零个或任意多个字符，并以".txt"结尾的文件</td>
+</tr>
+<tr>
+<td valign="top">Data???</td>
+<td valign="top">以“Data”开头，其后紧接着3个字符的文件</td>
+</tr>
+<tr>
+<td valign="top">[abc]*</td>
+<td valign="top">文件名以"a","b",或"c"开头的文件</td>
+</tr>
+<tr>
+<td valign="top">BACKUP.[0-9][0-9][0-9]</td>
+<td valign="top">以"BACKUP."开头，并紧接着3个数字的文件</td>
+</tr>
+<tr>
+<td valign="top">[[:upper:]]*</td>
+<td valign="top">以大写字母开头的文件</td>
+</tr>
+<tr>
+<td valign="top">[![:digit:]]*</td>
+<td valign="top">不以数字开头的文件</td>
+</tr>
+<tr>
+<td valign="top" width="25%">*[[:lower:]123]</td>
+<td valign="top">文件名以小写字母结尾，或以 “1”，“2”，或 “3” 结尾的文件</td>
+</tr>
+</table>
+
+## mkdir - 创建目录
+```
+mkdir directory...
+```
+>当有三个圆点跟在一个命令的参数后面， 这意味着那个参数可以重复
+
+```
+mkdir dir1 dir2 dir3
+```
+
+## cp - 复制文件和目录
+```
+cp item1 item2
+cp item... directory
+```
+### cp 选项
+<table class="multi">
+<tr>
+<th class="title">选项</th>
+<th class="title">意义</th>
+</tr>
+<tr>
+<td valign="top" width="25%">-a, --archive</td>
+<td valign="top">复制文件和目录，以及它们的属性，包括所有权和权限。
+通常，复本具有用户所操作文件的默认属性。</td>
+</tr>
+<tr>
+<td valign="top">-i, --interactive</td>
+<td valign="top">在重写已存在文件之前，提示用户确认。如果这个选项不指定，
+cp 命令会默认重写文件。</td>
+</tr>
+<tr>
+<td valign="top">-r, --recursive</td>
+<td valign="top">递归地复制目录及目录中的内容。当复制目录时，
+需要这个选项（或者-a 选项）。</td>
+</tr>
+<tr>
+<td valign="top">-u, --update </td>
+<td valign="top">当把文件从一个目录复制到另一个目录时，仅复制
+目标目录中不存在的文件，或者是文件内容新于目标目录中已经存在的文件。</td>
+</tr>
+<tr>
+<td valign="top">-v, --verbose</td>
+<td valign="top">显示翔实的命令操作信息</td>
+</tr>
+</table>
+
+## cp 实例
+<table class="multi">
+<tr>
+<th class="title">命令</th>
+<th class="title">运行结果</th>
+</tr>
+<tr>
+<td valign="top" width="25%">cp file1 file2</td>
+<td valign="top">复制文件 file1 内容到文件 file2。如果 file2 已经存在，
+file2 的内容会被 file1 的内容重写。如果 file2 不存在，则会创建 file2。</td>
+</tr>
+<tr>
+<td valign="top">cp -i file1 file2 </td>
+<td valign="top">这条命令和上面的命令一样，除了如果文件 file2 存在的话，在文件 file2 被重写之前，
+会提示用户确认信息。</td>
+</tr>
+<tr>
+<td valign="top">cp file1 file2 dir1 </td>
+<td valign="top">复制文件 file1 和文件 file2 到目录 dir1。目录 dir1 必须存在。
+</td>
+</tr>
+<tr>
+<td valign="top">cp dir1/* dir2 </td>
+<td valign="top">使用一个通配符，在目录 dir1 中的所有文件都被复制到目录 dir2 中。
+dir2 必须已经存在。</td>
+</tr>
+<tr>
+<td valign="top">cp -r dir1 dir2 </td>
+<td valign="top">复制目录 dir1 中的内容到目录 dir2。如果目录 dir2 不存在，
+创建目录 dir2，操作完成后，目录 dir2 中的内容和 dir1 中的一样。
+如果目录 dir2 存在，则目录 dir1 (和目录中的内容)将会被复制到 dir2 中。</td>
+</tr>
+</table>
+
+## mv - 移动和重命名文件
+```
+mv item1 item2
+mv item... directory
+```
+### mv 选项
+<table class="multi">
+<caption class="cap"></caption>
+<tr>
+<th class="title">选项</th>
+<th class="title">意义</th>
+</tr>
+<tr>
+<td valign="top" width="25%">-i --interactive</td>
+<td valign="top">在重写一个已经存在的文件之前，提示用户确认信息。
+<b>如果不指定这个选项，mv 命令会默认重写文件内容。</b></td>
+</tr>
+<tr>
+<td valign="top">-u --update</td>
+<td valign="top">当把文件从一个目录移动另一个目录时，只是移动不存在的文件，
+或者文件内容新于目标目录相对应文件的内容。</td>
+</tr>
+<tr>
+<td valign="top">-v --verbose</td>
+<td valign="top">当操作 mv 命令时，显示翔实的操作信息。</td>
+</tr>
+</table>
+
+### mv 实例
+<table class="multi">
+<caption class="cap"></caption>
+<tr>
+<td class="title">mv file1 file2</td>
+<td class="title">移动 file1 到 file2。<b>如果 file2 存在，它的内容会被 file1 的内容重写。
+</b>如果 file2 不存在，则创建 file2。<b> 每种情况下，file1 不再存在。</b></td>
+</tr>
+<tr>
+<td valign="top" width="25%">mv -i file1 file2</td>
+<td valign="top">除了如果 file2 存在的话，在 file2 被重写之前，用户会得到
+提示信息外，这个和上面的选项一样。</td>
+</tr>
+<tr>
+<td valign="top">mv file1 file2 dir1</td>
+<td valign="top">移动 file1 和 file2 到目录 dir1 中。dir1 必须已经存在。</td>
+</tr>
+<tr>
+<td valign="top">mv dir1 dir2</td>
+<td valign="top">如果目录 dir2 不存在，创建目录 dir2，并且移动目录 dir1 的内容到
+目录 dir2 中，同时删除目录 dir1。如果目录 dir2 存在，移动目录 dir1（及它的内容）到目录 dir2。</td>
+</tr>
+</table>
+
+## rm - 删除文件和目录
+```
+rm item...
+```
+### rm 选项
+<table class="multi">
+<tr>
+<th class="title">选项</th>
+<th class="title">意义</th>
+</tr>
+<tr>
+<td valign="top" width="25%">-i, --interactive </td>
+<td
+valign="top">在删除已存在的文件前，提示用户确认信息。
+<b>如果不指定这个选项，rm 会默默地删除文件</b>
+</td>
+</tr>
+<tr>
+<td valign="top">-r, --recursive</td>
+<td valign="top">递归地删除文件，这意味着，如果要删除一个目录，而此目录
+又包含子目录，那么子目录也会被删除。要删除一个目录，必须指定这个选项。</td>
+</tr>
+<tr>
+<td valign="top">-f, --force</td>
+<td valign="top">忽视不存在的文件，不显示提示信息。这选项覆盖了“--interactive”选项。</td>
+</tr>
+<tr>
+<td valign="top">-v, --verbose</td>
+<td valign="top">在执行 rm 命令时，显示翔实的操作信息。</td>
+</tr>
+</table>
+
+### rm 实例
+<table class="multi">
+<tr>
+<th class="title">命令</th>
+<th class="title">运行结果</th>
+</tr>
+<tr>
+<td valign="top" width="25%">rm file1</td>
+<td valign="top">默默地删除文件</td>
+</tr>
+<tr>
+<td valign="top">rm -i file1</td>
+<td valign="top">除了在删除文件之前，提示用户确认信息之外，和上面的命令作用一样。</td>
+</tr>
+<tr>
+<td valign="top">rm -r file1 dir1</td>
+<td valign="top">删除文件 file1, 目录 dir1，及 dir1 中的内容。</td>
+</tr>
+<tr>
+<td valign="top">rm -rf file1 dir1</td>
+<td valign="top">同上，除了如果文件 file1，或目录 dir1 不存在的话，rm 仍会继续执行。</td>
+</tr>
+</table>
+
+>无论什么时候，rm 命令用到通配符（除了仔细检查输入的内容外！）， 用 ls 命令来测试通配符。这会让你看到要删除的文件列表。然后按下上箭头按键，重新调用 刚刚执行的命令，用 rm 替换 ls。
+
+## ln — 创建链接
+ln 命令既可创建硬链接，也可以创建符号链接。
+```
+# 创建硬链接
+ln file link
+# 创建符号链接
+ln -s item link
+```
